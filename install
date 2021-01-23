@@ -1,0 +1,32 @@
+#!/bin/bash
+# This script will build and install ytools
+
+# Author: Yuriy Lazutin
+# Site: https://github.com/YuriyLazutin
+# Location: Tomsk, Siberia
+# Creation: 2021-jan-23
+# Donates:
+#          https://www.paypal.com/paypalme/yuriylazutin
+#          https://www.patreon.com/yuriylazutin
+
+# Create
+#	.qmake.stash
+#	Makefile
+qmake ytools.pro -spec linux-g++
+
+# Create
+#	show-message/Makefile
+make -f Makefile qmake_all
+
+# Create
+#	show-message/dialog.o
+#	show-message/main.o
+#	show-message/moc_dialog.cpp
+#	show-message/moc_dialog.o
+#	show-message/moc_predefs.h
+#	show-message/show-message
+make -j8
+
+sudo make install
+
+sudo ln -s /opt/ytools/show-message /usr/local/bin/ytools-show-message

@@ -27,6 +27,6 @@ make -f Makefile qmake_all
 #	show-message/show-message
 make -j8
 
-sudo make install
-
+sudo mkdir -p /opt/ytools
+sudo cp show-message/show-message /opt/ytools/show-message
 sudo ln -s /opt/ytools/show-message /usr/local/bin/ytools-show-message

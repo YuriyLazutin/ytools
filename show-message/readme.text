@@ -1,0 +1,11 @@
+show-message - this tool will show a message box. Message text should be provided via command line.
+
+Options:
+    -t	--text		A text message whet you want to show
+    -h	--help		Will show help and exit
+
+Examples:
+
+show-message --text "You operation was completed successfully."
+show-message -t "You operation was completed successfully."
+show-message --help

@@ -28,5 +28,7 @@ class Dialog : public QDialog
   public:
     Dialog(QWidget *parent = nullptr);
     ~Dialog();
+    void SetMessageText(const char* msg);
+    void SetWindowTitle(const char* title);
 };
 #endif // DIALOG_H

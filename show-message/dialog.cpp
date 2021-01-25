@@ -40,8 +40,8 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent)
 
     verticalLayout->addLayout(horizontalLayout);
 
-    setWindowTitle(QApplication::translate("Dialog", "Message", nullptr));
-    label->setText(QApplication::translate("Dialog", "Message Text", nullptr));
+    SetWindowTitle("Message");
+    SetMessageText("Message Text");
     pushButton->setText(QApplication::translate("Dialog", "Ok", nullptr));
 
     connect(pushButton, SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -52,3 +52,11 @@ Dialog::~Dialog()
 {
 }
 
+void Dialog::SetMessageText(const char* msg)
+{
+    label->setText(QApplication::translate("Dialog", msg, nullptr));
+}
+void Dialog::SetWindowTitle(const char* title)
+{
+    setWindowTitle(QApplication::translate("Dialog", title, nullptr));
+}

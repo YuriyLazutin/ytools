@@ -1,0 +1,42 @@
+html {
+  height: 100%; /* Total page height */
+}
+
+body {
+  display: block;
+  background-color: rgb(160, 200, 210);
+  background: radial-gradient(at 50% 50% , rgb(190, 200, 210), rgb(160, 200, 210));
+/*  background-image: url(background.png); */
+/*  background-size: 100% 100%; */
+/*  background-attachment: fixed; */
+
+  color: rgb(102, 51, 0);
+  text-shadow: 1px 1px 0px rgb(0, 0, 0), 0 0 1em rgb(255, 255, 0); /*Text with 2 shadows. Second - yellow light*/
+}
+
+.main_h1 {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 2em; 
+  text-align: center;
+  vertical-align: top;
+  background-color: rgba(255, 174, 0, 0.8);
+  border-radius: 10px 10px;
+  max-width: 66%;
+  padding: 10px;
+}
+
+header {
+  display:block;
+}
+
+footer {
+  display:block;
+  clear:both;
+}
+
+.letter {
+  color: red;
+  font-size: 2em;
+  text-shadow: 0 0 1em rgb(255, 255, 0);
+}

@@ -1,13 +1,16 @@
-#include "dialog.h"
-
 #include <QApplication>
-#include <QString>
+#include "dialog.h"
 
 //#include <string.h>  // strlen
 #include <getopt.h> // getopt_long, no_argument, required_argument, optarg, optind
 
+// Print help message and exit.
+void print_help();
+char* program_name;
+
 int main(int argc, char** argv)
 {
+    program_name = argv[0];
     QApplication a(argc, argv);
     Dialog w;
 
@@ -32,9 +35,9 @@ int main(int argc, char** argv)
         {
             // -h or --help
             case 'h':
-                      //print_help();
-                      //return (rc);
-                      return a.exec();
+                      print_help();
+                      return (EXIT_SUCCESS);
+                      //return a.exec();
             // -m or --message
             case 'm':
                       w.SetMessageText(optarg);
@@ -45,8 +48,9 @@ int main(int argc, char** argv)
                       break;
             // Incorrect option
             case '?':
-                      // print_help();
-                      return a.exec(); // ToDo: There should be returned error code!
+                      print_help();
+                      return (EXIT_FAILURE);
+                      //return a.exec(); // ToDo: There should be returned error code!
             // No more option
             case -1:
                      break;
@@ -59,4 +63,14 @@ int main(int argc, char** argv)
 
     w.show();
     return a.exec();
+}
+
+// Print help message and exit.
+void print_help()
+{
+    fprintf(stdout, "*** show-message - simple program which show dialog with custom text message. ***\n\n");
+    fprintf(stdout, "Usage: %s [options] \n", program_name);
+    fprintf(stdout, "%4s, %-30s %s\n", "-h", "--help", "Display this help and exit.");
+    fprintf(stdout, "%4s, %-30s %s\n", "-m", "--message \"Text message\"", "Text string which will show in dialog. You can use HTML markup language for better view.");
+    fprintf(stdout, "%4s, %-30s %s\n", "-t", "--title \"Dialog title\"", "This text will show in dialog header.");
 }

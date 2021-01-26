@@ -30,5 +30,6 @@ class Dialog : public QDialog
     ~Dialog();
     void SetMessageText(const char* msg);
     void SetWindowTitle(const char* title);
+    void SetButtonText(const char* txt);
 };
 #endif // DIALOG_H

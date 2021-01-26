@@ -1,7 +1,5 @@
 #include <QApplication>
 #include "dialog.h"
-
-//#include <string.h>  // strlen
 #include <getopt.h> // getopt_long, no_argument, required_argument, optarg, optind
 
 // Print help message and exit.
@@ -17,14 +15,15 @@ int main(int argc, char** argv)
     int next_option;
 
     // String with possible short options
-    const char* const short_options = "hm:t:";
+    const char* const short_options = "hm:t:b:";
 
     // Array with possible long options.
     const struct option long_options[] =
     {
         { "help", no_argument, NULL, 'h' },
         { "message", required_argument, NULL, 'm' },
-        { "title", required_argument, NULL, 't' },
+        { "dtitle", required_argument, NULL, 't' },
+        { "btntext", required_argument, NULL, 'b' },
         { NULL, 0, NULL, 0 }
     };
 
@@ -37,20 +36,22 @@ int main(int argc, char** argv)
             case 'h':
                       print_help();
                       return (EXIT_SUCCESS);
-                      //return a.exec();
             // -m or --message
             case 'm':
                       w.SetMessageText(optarg);
                       break;
-            // -t or --title
+            // -t or --dtitle
             case 't':
                       w.SetWindowTitle(optarg);
+                      break;
+            // -b or --btntext
+            case 'b':
+                      w.SetButtonText(optarg);
                       break;
             // Incorrect option
             case '?':
                       print_help();
                       return (EXIT_FAILURE);
-                      //return a.exec(); // ToDo: There should be returned error code!
             // No more option
             case -1:
                      break;
@@ -71,6 +72,7 @@ void print_help()
     fprintf(stdout, "*** show-message - simple program which show dialog with custom text message. ***\n\n");
     fprintf(stdout, "Usage: %s [options] \n", program_name);
     fprintf(stdout, "%4s, %-30s %s\n", "-h", "--help", "Display this help and exit.");
-    fprintf(stdout, "%4s, %-30s %s\n", "-m", "--message \"Text message\"", "Text string which will show in dialog. You can use HTML markup language for better view.");
-    fprintf(stdout, "%4s, %-30s %s\n", "-t", "--title \"Dialog title\"", "This text will show in dialog header.");
+    fprintf(stdout, "%4s, %-30s %s\n", "-m", "--message \"Text message\"", "Text string which will show in dialog (default \"Message Text\"). You can use HTML markup language for better view.");
+    fprintf(stdout, "%4s, %-30s %s\n", "-t", "--dtitle \"Dialog title\"", "This text will show in dialog header (default \"Message\").");
+    fprintf(stdout, "%4s, %-30s %s\n", "-b", "--btntext \"Ok\"", "Button will labled with this text (default \"Ok\").");
 }

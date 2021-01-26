@@ -42,7 +42,7 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent)
 
     SetWindowTitle("Message");
     SetMessageText("Message Text");
-    pushButton->setText(QApplication::translate("Dialog", "Ok", nullptr));
+    SetButtonText("Ok");
 
     connect(pushButton, SIGNAL(clicked()), qApp, SLOT(quit()));
     //connect(pushButton, SIGNAL(released()), qApp, SLOT(quit()));
@@ -56,7 +56,13 @@ void Dialog::SetMessageText(const char* msg)
 {
     label->setText(QApplication::translate("Dialog", msg, nullptr));
 }
+
 void Dialog::SetWindowTitle(const char* title)
 {
     setWindowTitle(QApplication::translate("Dialog", title, nullptr));
+}
+
+void Dialog::SetButtonText(const char* txt)
+{
+    pushButton->setText(QApplication::translate("Dialog", txt, nullptr));
 }

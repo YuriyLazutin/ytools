@@ -74,5 +74,5 @@ void print_help()
     fprintf(stdout, "%4s, %-30s %s\n", "-h", "--help", "Display this help and exit.");
     fprintf(stdout, "%4s, %-30s %s\n", "-m", "--message \"Text message\"", "Text string which will show in dialog (default \"Message Text\"). You can use HTML markup language for better view.");
     fprintf(stdout, "%4s, %-30s %s\n", "-t", "--dtitle \"Dialog title\"", "This text will show in dialog header (default \"Message\").");
-    fprintf(stdout, "%4s, %-30s %s\n", "-b", "--btntext \"Ok\"", "Button will labled with this text (default \"Ok\").");
+    fprintf(stdout, "%4s, %-30s %s\n", "-b", "--btntext \"Ok\"", "Button will labeled with this text (default \"Ok\").");
 }

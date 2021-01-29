@@ -10,3 +10,8 @@ Profile
 *.o
 
 # Executables
+
+
+# Backup css and html files
+*.css~
+*.html~

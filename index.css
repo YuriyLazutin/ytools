@@ -1,33 +1,47 @@
 html {
-  height: 100%; /* Total page height */
+  height: 100%;
 }
 
 body {
   display: block;
   background-color: rgb(160, 200, 210);
   background: radial-gradient(at 50% 50% , rgb(190, 200, 210), rgb(160, 200, 210));
-/*  background-image: url(background.png); */
-/*  background-size: 100% 100%; */
-/*  background-attachment: fixed; */
-
-  color: rgb(102, 51, 0);
-  text-shadow: 1px 1px 0px rgb(0, 0, 0), 0 0 1em rgb(255, 255, 0); /*Text with 2 shadows. Second - yellow light*/
+  color: rgb(72, 41, 40);
+  text-shadow: 1px 1px 0px rgb(0, 0, 0), 0 0 1em rgb(148, 223, 230);
+  font-size: 1.2em; 
 }
 
-.main_h1 {
-  font-weight: bold;
-  font-style: italic;
-  font-size: 2em; 
-  text-align: center;
-  vertical-align: top;
-  background-color: rgba(255, 174, 0, 0.8);
-  border-radius: 10px 10px;
-  max-width: 66%;
-  padding: 10px;
+.th{
+	width: 100%;	
+	background-color: rgb(130, 170, 180);
+	background: radial-gradient(at 50% 50% , rgb(160, 170, 180), rgb(130, 170, 180));
 }
 
-header {
-  display:block;
+@font-face {
+		font-family: 'YTools-font';
+        src: url(doc/ytools.ttf);
+}
+
+h1 {
+    font-family: 'YTools-font';
+    font-size: 3em;
+}
+
+h2 {
+    font-family: Courier;
+    font-size: 2em;
+}
+
+.tb{
+	width: 100%;	
+}
+
+code{
+  display: block;
+  background-color: rgb(200, 240, 250);
+  background: radial-gradient(at 50% 50% , rgb(210, 220, 230), rgb(180, 220, 230));
+  font-family: Courier;
+  font-size: 1em;
 }
 
 footer {
@@ -36,6 +50,7 @@ footer {
 }
 
 .letter {
+  font-family: 'YTools-font';
   color: red;
   font-size: 2em;
   text-shadow: 0 0 1em rgb(255, 255, 0);

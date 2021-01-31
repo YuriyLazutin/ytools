@@ -1,6 +1,9 @@
 #include "dialog.h"
+#include <QFileDialog>
+//#include <iostream>
+#include <QTextStream>
 
-Dialog::Dialog(QWidget *parent) : QDialog(parent)
+Dialog::Dialog(QWidget *parent) : QDialog(parent/*, Qt::WindowTitleHint | Qt::WindowSystemMenuHint*/)
 {
 
     setObjectName(QString::fromUtf8("Dialog"));
@@ -70,8 +73,10 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent)
     SetMessageText("Please specify a file name");
     SetAcceptButtonText("Accept");
 
-    connect(btnAccept, SIGNAL(clicked()), qApp, SLOT(quit()));
+    //connect(btnAccept, SIGNAL(clicked()), qApp, SLOT(quit()));
+    connect(btnAccept, SIGNAL(clicked()), SLOT(BtnAcceptClicked()));
     //connect(pushButton, SIGNAL(released()), qApp, SLOT(quit()));
+    connect(btnQueryFile, SIGNAL(clicked()), SLOT(QueryFileDlg()));
 }
 
 Dialog::~Dialog()
@@ -95,5 +100,21 @@ void Dialog::SetAcceptButtonText(const char* txt)
 
 void Dialog::SetFileMask(const char* fmask)
 {
+    sFileMask = fmask;
+}
 
+void Dialog::QueryFileDlg()
+{
+    QString res;
+    res = QFileDialog::getOpenFileName(0, "Select a file", "", sFileMask);
+    leFullFileName->setText(res);
+    //leFullFileName->setText("Test");
+}
+
+void Dialog::BtnAcceptClicked()
+{
+    //std::cout << leFullFileName->text().toStdString() << std::endl;
+    QTextStream out(stdout);
+    out << leFullFileName->text() << endl;
+    qApp->quit();
 }

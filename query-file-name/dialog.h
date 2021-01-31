@@ -26,7 +26,7 @@ class Dialog : public QDialog
       QSpacerItem *horizontalSpacerLeft;
       QPushButton *btnAccept;
       //QSpacerItem *horizontalSpacerRight;
-
+    QString  sFileMask;
   public:
     Dialog(QWidget *parent = nullptr);
     ~Dialog();
@@ -34,5 +34,8 @@ class Dialog : public QDialog
     void SetWindowTitle(const char* title);
     void SetAcceptButtonText(const char* txt);
     void SetFileMask(const char* fmask);
+  public slots:
+    void QueryFileDlg();
+    void BtnAcceptClicked();
 };
 #endif // DIALOG_H

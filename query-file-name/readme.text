@@ -3,12 +3,15 @@ query-file-name - this tool will show a dialog in which you can cpecify a file n
                   All parameters should be provided via command line.
 
 Options:
-    -t	--text		A text message, it should clarify you request
-    -e	--extension	A filter mask witch was used during file selection. For example you can select only *.dat files
+    -m	--message	A text message, it should clarify you request
+    -f	--file-mask	A filter mask witch will used during file selection. For example you can allow to select only *.dat files
+    -t  --dtitle        A text string which will show in dialog header
+    -b  --btntext       This text will show on Accept button, i.e. you can rename this button
     -h	--help		Will show help and exit
 
 Examples:
 
-query-file-name --text "Please select a source file name"
-query-file-name -t "Please select an image file" -e "*.png"
+query-file-name --message "Please select a source file name"
+query-file-name -m "Please select an image file" -f "*.png"
+query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!"
 query-file-name --help

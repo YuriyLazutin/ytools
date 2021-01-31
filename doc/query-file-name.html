@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <meta http-equiv="content-type" content="text/html">
+    <meta name="author" content="Yuriy Lazutin" >
+    <meta name="description" content="ytools - documentation">
+    <meta name="keywords" content="Yuriy Lazutin, ytools, you tools, programming">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="Global">
+<!--
+    <meta name="robots" content="index,follow">
+-->
+    <title>ytools - this is you tools</title>
+    <link rel="stylesheet" type="text/css" href="../index.css">
+  </head>
+  
+  <body
+    bgproperties="fixed"
+    onload="window.defaultStatus='ytools - this is you tools'"
+    alink="#48298C"
+    link="#48298C"
+    vlink="#780078"
+    style="width: 100%;"
+  >
+
+    <header>
+      <table class="pghead">
+        <tr>
+          <td style="width: 5%;"></td>
+          <td style="width: 30%;"> <img src="ytools-header.png"></td>
+          <td style="width: 5%;"></td>
+          <td><H1>- this is you tools</H1></td>
+          <td style="width: 5%;"></td>
+        </tr>
+      </table>
+    </header>
+ 
+    <br>
+    
+    <!-- Central -->
+    <table class="tb">
+      <tr>
+        <td style="width: 10%;"></td>
+        <td valign="top" style="width: 68%; border-radius: 10px 10px; border: 1px solid black; padding: 20px;">
+          <h2>ytools-query-file-name</h2>
+          <article>
+            <p><span class="letter">T</span>his tool will show a dialog in which you can specify a file name, or you can use a standard "Open File"-dialog to select a file.
+                  This file name will returned back to requesting program. Also you can specify a message text to clarify you request for user.
+                  All parameters should be provided via command line.
+            <br><br>
+            <h3>Options:</h3>
+            <table class="topt">
+              <tr><th style="width: 10%;">Short</th><th style="width: 15%;">Long</th><th>Description</th></tr>
+              <tr><td align="center">-m</td><td>--message</td><td>A text message, it should clarify you request</td></tr>
+              <tr><td align="center">-f</td><td>--file-mask</td><td>A filter mask witch will used during file selection. For example you can allow to select only *.dat files</td></tr>
+              <tr><td align="center">-d</td><td>--directory</td><td>A base directory. In this directory initially will open query file dialog</td></tr>
+              <tr><td align="center">-t</td><td>--dtitle</td><td>A text string which will show in dialog header</td></tr>
+              <tr><td align="center">-b</td><td>--btntext</td><td>This text will show on Accept button, i.e. you can rename this button</td></tr>
+              <tr><td align="center">-h</td><td>--help</td><td>Will show help and exit</td></tr>
+            </table>
+           <br>
+           <h3>Examples:</h3>
+           <h4>Query any file</h4>
+           <code>
+             #!/bin/bash<br>
+             # some actions here<br>
+             $(ytools-query-file-name --message "Please select a source file name")<br>           
+           </code>
+           <br>As a result following window will appear:<br><br>
+           <img src="query-file-name-01.png" align="center">
+            
+           <br><br>
+           <h4>Query an image file</h4>
+           Files can be png, bmp, jpg or gif format. File formats are divided on 2 groups - lossless and lossy.<br><br>
+           <code>
+             #!/bin/bash<br>
+             # some actions here<br>
+             $(ytools-query-file-name -m "Please select an image file" -f "*.png *.bmp ;; *.jpg *.gif")<br>           
+           </code>
+           <br>As a result following window will appear:<br><br>
+           <img src="query-file-name-02.png" align="center">
+            
+           <br><br>
+           <h4>Query an jar archive</h4>
+           Accept button will renamed to "Patch this!".<br><br>
+           <code>
+             #!/bin/bash<br>
+             # some actions here<br>
+             $(ytools-query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!")<br>           
+           </code>
+           <br>As a result following window will appear:<br><br>
+           <img src="query-file-name-03.png" align="center">
+            
+            
+           <br><br>
+           <h4>Query any file</h4>
+           But if you will use query file dialog it will opened from /opt/share directory.<br><br>
+           <code>
+             #!/bin/bash<br>
+             # some actions here<br>
+             $(ytools-query-file-name --message "Please select a source file name" --directory "/opt/share")<br>           
+           </code>
+           <br>As a result following window will appear:<br><br>
+           <img src="query-file-name-04.png" align="center">
+            
+            
+           <br><br>
+           <h4>Show help</h4>
+           This command will show a help message.<br><br>
+           <code>
+             ytools-query-file-name --help<br>
+             <br>As a result following information will shown:<br><br>
+             <br>
+             ...<br>           
+           </code>
+            
+          </article>    
+        </td>
+        <td style="width: 10%;"></td>
+      </tr>
+    </table>
+
+  </body>
+</html>

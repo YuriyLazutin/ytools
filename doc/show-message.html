@@ -13,8 +13,6 @@
 -->
     <title>ytools - this is you tools</title>
     <link rel="stylesheet" type="text/css" href="../index.css">
-    <script src="/path/to/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </head>
   
   <body
@@ -23,11 +21,11 @@
     alink="#48298C"
     link="#48298C"
     vlink="#780078"
-    style="width: 100%; height: 100%; position: fixed;"
+    style="width: 100%;"
   >
 
     <header>
-      <table class="th">
+      <table class="pghead">
         <tr>
           <td style="width: 5%;"></td>
           <td style="width: 30%;"> <img src="ytools-header.png"></td>
@@ -45,14 +43,14 @@
       <tr>
         <td style="width: 10%;"></td>
         <td valign="top" style="width: 68%; border-radius: 10px 10px; border: 1px solid black; padding: 20px;">
-          <h2>show-message</h2>
+          <h2>ytools-show-message</h2>
           <article>
             <p><span class="letter">T</span>his tool provide you a simple way to include message boxes into you shell scripts.
             <br><br>
-            <code class="language-bash">
+            <code>
              #!/bin/bash<br>
              # some actions here<br>
-             $(show-message --message "You operations was completed.")<br>           
+             $(ytools-show-message --message "You operations was completed.")<br>           
             </code>
             <br>As a result following window will appear:<br><br>
             <img src="show-message-01.png" align="center">

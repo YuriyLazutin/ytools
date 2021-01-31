@@ -1,5 +1,5 @@
-query-file-name - this tool will show a dialog in which you can cpecify a file name, or you can use a standard "Open File"-dialog to select a file.
-                  This file name will returned back to requesting programm. Also you can cpecify a message text to clarify you request for user.
+query-file-name - this tool will show a dialog in which you can specify a file name, or you can use a standard "Open File"-dialog to select a file.
+                  This file name will returned back to requesting program. Also you can specify a message text to clarify you request for user.
                   All parameters should be provided via command line.
 
 Options:

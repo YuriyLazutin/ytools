@@ -9,6 +9,9 @@
 #          https://www.paypal.com/paypalme/yuriylazutin
 #          https://www.patreon.com/yuriylazutin
 
+export YTOOLS_HOME="/opt/ytools"
+export LBIN="/usr/local/bin"
+
 # Create
 #	.qmake.stash
 #	Makefile
@@ -25,8 +28,16 @@ make -f Makefile qmake_all
 #	show-message/moc_dialog.o
 #	show-message/moc_predefs.h
 #	show-message/show-message
+#	query-file-name/dialog.o
+#	query-file-name/main.o
+#	query-file-name/moc_dialog.cpp
+#	query-file-name/moc_dialog.o
+#	query-file-name/moc_predefs.h
+#	query-file-name/query-file-name
 make -j8
 
-sudo mkdir -p /opt/ytools
-sudo cp show-message/show-message /opt/ytools/show-message
-sudo ln -s /opt/ytools/show-message /usr/local/bin/ytools-show-message
+sudo mkdir -p "${YTOOLS_HOME}"
+sudo cp "show-message/show-message" "${YTOOLS_HOME}/show-message"
+sudo ln -s "${YTOOLS_HOME}/show-message" "${LBIN}/ytools-show-message"
+sudo cp "query-file-name/query-file-name" "${YTOOLS_HOME}/query-file-name"
+sudo ln -s "${YTOOLS_HOME}/query-file-name" "${LBIN}/ytools-query-file-name"

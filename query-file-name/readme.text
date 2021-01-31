@@ -1,0 +1,14 @@
+query-file-name - this tool will show a dialog in which you can cpecify a file name, or you can use a standard "Open File"-dialog to select a file.
+                  This file name will returned back to requesting programm. Also you can cpecify a message text to clarify you request for user.
+                  All parameters should be provided via command line.
+
+Options:
+    -t	--text		A text message, it should clarify you request
+    -e	--extension	A filter mask witch was used during file selection. For example you can select only *.dat files
+    -h	--help		Will show help and exit
+
+Examples:
+
+query-file-name --text "Please select a source file name"
+query-file-name -t "Please select an image file" -e "*.png"
+query-file-name --help

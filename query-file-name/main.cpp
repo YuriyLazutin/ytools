@@ -15,7 +15,7 @@ int main(int argc, char** argv)
     int next_option;
 
     // String with possible short options
-    const char* const short_options = "hm:f:t:b:";
+    const char* const short_options = "hm:f:d:t:b:";
 
     // Array with possible long options.
     const struct option long_options[] =
@@ -23,6 +23,7 @@ int main(int argc, char** argv)
         { "help", no_argument, NULL, 'h' },
         { "message", required_argument, NULL, 'm' },
         { "file-mask", required_argument, NULL, 'f' },
+        { "directory", required_argument, NULL, 'd' },
         { "dtitle", required_argument, NULL, 't' },
         { "btntext", required_argument, NULL, 'b' },
         { NULL, 0, NULL, 0 }
@@ -44,6 +45,10 @@ int main(int argc, char** argv)
             // -f or --file-mask
             case 'f':
                       w.SetFileMask(optarg);
+                      break;
+            // -d or --directory
+            case 'd':
+                      w.SetBaseDirectory(optarg);
                       break;
             // -t or --dtitle
             case 't':
@@ -79,6 +84,7 @@ void print_help()
     fprintf(stdout, "%4s, %-30s %s\n", "-h", "--help", "Display this help and exit.");
     fprintf(stdout, "%4s, %-30s %s\n", "-m", "--message \"Clarifying text\"", "Text string which will show in dialog (default \"Please specify a file name\"). Please use it for clarifying you request. You can use HTML markup language for better view.");
     fprintf(stdout, "%4s, %-30s %s\n", "-f", "--file-mask \"*.ext\"", "A filter mask witch will used during file selection. For example you can allow to select only *.dat files.");
+    fprintf(stdout, "%4s, %-30s %s\n", "-d", "--directory \"/base/directory\"", "In this directory initially will open query file dialog.");
     fprintf(stdout, "%4s, %-30s %s\n", "-t", "--dtitle \"New dialog title\"", "This text will show in dialog header (default \"Query file name\").");
     fprintf(stdout, "%4s, %-30s %s\n", "-b", "--btntext \"New btn label\"", "Accept button will labeled with this text (default \"Accept\").");
 }

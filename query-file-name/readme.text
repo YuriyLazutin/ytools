@@ -5,6 +5,7 @@ query-file-name - this tool will show a dialog in which you can cpecify a file n
 Options:
     -m	--message	A text message, it should clarify you request
     -f	--file-mask	A filter mask witch will used during file selection. For example you can allow to select only *.dat files
+    -d  --directory     A base directory. In this directory initially will open query file dialog
     -t  --dtitle        A text string which will show in dialog header
     -b  --btntext       This text will show on Accept button, i.e. you can rename this button
     -h	--help		Will show help and exit
@@ -12,6 +13,7 @@ Options:
 Examples:
 
 query-file-name --message "Please select a source file name"
-query-file-name -m "Please select an image file" -f "*.png"
+query-file-name -m "Please select an image file" -f "*.png *.bmp ;; *.jpg *.gif"
 query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!"
+query-file-name --message "Please select a source file name" --directory "/opt/share"
 query-file-name --help

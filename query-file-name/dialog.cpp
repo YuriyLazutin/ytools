@@ -103,12 +103,27 @@ void Dialog::SetFileMask(const char* fmask)
     sFileMask = fmask;
 }
 
+void Dialog::SetBaseDirectory(const char* bdir)
+{
+    sBaseDir = bdir;
+    leFullFileName->setText(sBaseDir + "/");
+}
+
 void Dialog::QueryFileDlg()
 {
     QString res;
-    res = QFileDialog::getOpenFileName(0, "Select a file", "", sFileMask);
+    res = QFileDialog::getOpenFileName(0, "Select a file", sBaseDir, sFileMask);
     leFullFileName->setText(res);
-    //leFullFileName->setText("Test");
+
+    /*QStringList resl;
+    resl = QFileDialog::getOpenFileNames(0, "Select a few file", sBaseDir, sFileMask);
+    leFullFileName->setText(res);
+
+    res = QFileDialog::getSaveFileName(0, "Select a file for save", sBaseDir, sFileMask);
+    leFullFileName->setText(res);
+
+    res = QFileDialog::getExistingDirectory(0, "Select a dir", sBaseDir);
+    leFullFileName->setText(res); */
 }
 
 void Dialog::BtnAcceptClicked()

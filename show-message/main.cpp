@@ -15,7 +15,7 @@ int main(int argc, char** argv)
     int next_option;
 
     // String with possible short options
-    const char* const short_options = "hm:t:b:";
+    const char* const short_options = "hm:t:b:x:y:";
 
     // Array with possible long options.
     const struct option long_options[] =
@@ -24,6 +24,8 @@ int main(int argc, char** argv)
         { "message", required_argument, NULL, 'm' },
         { "dtitle", required_argument, NULL, 't' },
         { "btntext", required_argument, NULL, 'b' },
+        { "sizex", required_argument, NULL, 'x' },
+        { "sizey", required_argument, NULL, 'y' },
         { NULL, 0, NULL, 0 }
     };
 
@@ -47,6 +49,18 @@ int main(int argc, char** argv)
             // -b or --btntext
             case 'b':
                       w.SetButtonText(optarg);
+                      break;
+            // -x or --sizex
+            case 'x':
+                      unsigned int x;
+                      x=atoi(optarg);
+                      w.SetSizeX(x);
+                      break;
+            // -y or --sizey
+            case 'y':
+                      unsigned int y;
+                      y=atoi(optarg);
+                      w.SetSizeY(y);
                       break;
             // Incorrect option
             case '?':
@@ -75,4 +89,6 @@ void print_help()
     fprintf(stdout, "%4s, %-30s %s\n", "-m", "--message \"Text message\"", "Text string which will show in dialog (default \"Message Text\"). You can use HTML markup language for better view.");
     fprintf(stdout, "%4s, %-30s %s\n", "-t", "--dtitle \"Dialog title\"", "This text will show in dialog header (default \"Message\").");
     fprintf(stdout, "%4s, %-30s %s\n", "-b", "--btntext \"Ok\"", "Button will labeled with this text (default \"Ok\").");
+    fprintf(stdout, "%4s, %-30s %s\n", "-x", "--sizex window_width", "This parameter allow you to customize window width (default 300 pixels, minimum 300).");
+    fprintf(stdout, "%4s, %-30s %s\n", "-y", "--sizey window_height", "This parameter allow you to customize window height (default 120 pixels, minimum 120).");
 }

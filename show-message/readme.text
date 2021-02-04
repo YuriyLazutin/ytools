@@ -1,11 +1,17 @@
 show-message - this tool will show a message box. Message text should be provided via command line.
+               You can show as a simple text messages, as a messages in html format.
 
 Options:
-    -t	--text		A text message whet you want to show
-    -h	--help		Will show help and exit
+    -h  --help		                       Will show help and exit
+    -m  --message	"Your text message"    Text string which will show in dialog (default "Message Text"). You can use HTML markup language for better view.
+    -t  --dtitle        "Dialog title"         This text will show in dialog header (default "Message")
+    -b  --btntext       "Ok"                   Button will labeled with this text (default "Ok")
+    -x  --sizex         window_width           This parameter allow you to customize window width (default 300 pixels, minimum 300)
+    -y  --sizey         window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120)
 
 Examples:
 
-show-message --text "You operation was completed successfully."
-show-message -t "You operation was completed successfully."
-show-message --help
+./show-message --help
+./show-message --message "You job was completed successfully."
+./show-message -t "I want to say you something..."  -m "<b>I notice,<br>that you are a very good person! </b>" --btntext "I agree"
+./show-message --sizex 600 --sizey 250 --message "<h3>You operation was completed successfully.</h3>Now you can safely pour yourself a cup of tea and enjoy the work done.<br>Thanks for using our program friend.<br><i>(c) Your company dot com</i>"

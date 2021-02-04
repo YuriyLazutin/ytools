@@ -9,10 +9,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QApplication>
 
-//#include <QtCore/QVariant>
-//
-//#include <QtWidgets/QDialog>
-
 class Dialog : public QDialog
 {
   Q_OBJECT
@@ -24,6 +20,8 @@ class Dialog : public QDialog
     QSpacerItem *horizontalSpacerLeft;
     QPushButton *pushButton;
     QSpacerItem *horizontalSpacerRight;
+    unsigned int uWidth;
+    unsigned int uHeight;
 
   public:
     Dialog(QWidget *parent = nullptr);
@@ -31,5 +29,7 @@ class Dialog : public QDialog
     void SetMessageText(const char* msg);
     void SetWindowTitle(const char* title);
     void SetButtonText(const char* txt);
+    void SetSizeX(const unsigned int sx);
+    void SetSizeY(const unsigned int sy);
 };
 #endif // DIALOG_H

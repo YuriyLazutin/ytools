@@ -28,5 +28,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    notes.text \
     readme.text
+
+RESOURCES += \
+    resources.qrc
 

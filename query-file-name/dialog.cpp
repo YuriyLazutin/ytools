@@ -7,7 +7,7 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent/*, Qt::WindowTitleHint | Qt::Wi
 {
 
     setObjectName(QString::fromUtf8("Dialog"));
-    resize(400, 120);
+    resize(500, 120);
     QSizePolicy szPolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     szPolicy.setHorizontalStretch(0);
     szPolicy.setVerticalStretch(0);
@@ -34,13 +34,17 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent/*, Qt::WindowTitleHint | Qt::Wi
       leFullFileName = new QLineEdit;
       leFullFileName->setFocus();
       hlFileName->addWidget(leFullFileName);
+      leFullFileName->setMinimumHeight(32);
       // Add spacer
       hsFileNameSpacer1 = new QSpacerItem(10, 10, QSizePolicy::Fixed, QSizePolicy::Minimum);
       hlFileName->addItem(hsFileNameSpacer1);
       // Add "query file" button
       btnQueryFile = new QPushButton(this);
       btnQueryFile->setObjectName(QString::fromUtf8("btnQueryFile"));
-      btnQueryFile->setMinimumSize(QSize(25, 25));
+      btnQueryFile->setMinimumSize(QSize(leFullFileName->minimumHeight(), leFullFileName->minimumHeight()));
+      btnQueryFile->setFlat(true);
+      btnQueryFile->setIcon(QPixmap(":/document-open.png"));
+      btnQueryFile->setIconSize(QSize(leFullFileName->minimumHeight(), leFullFileName->minimumHeight()));
       btnQueryFile->setAutoFillBackground(false);
       btnQueryFile->setStyleSheet(QString::fromUtf8("background-color: rgb(148, 150, 148);"));
       hlFileName->addWidget(btnQueryFile);

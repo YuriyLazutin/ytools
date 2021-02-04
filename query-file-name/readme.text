@@ -3,17 +3,21 @@ query-file-name - this tool will show a dialog in which you can specify a file n
                   All parameters should be provided via command line.
 
 Options:
-    -m	--message	A text message, it should clarify you request
-    -f	--file-mask	A filter mask witch will used during file selection. For example you can allow to select only *.dat files
-    -d  --directory     A base directory. In this directory initially will open query file dialog
-    -t  --dtitle        A text string which will show in dialog header
-    -b  --btntext       This text will show on Accept button, i.e. you can rename this button
+    -m	--message	"Clarifying text"      A text message, it should clarify you request
+    -f	--file-mask	"*.ext"                A filter mask witch will used during file selection. For example you can allow to select only *.dat files
+    -d  --directory     "/base/directory"      A base directory. In this directory initially will open query file dialog
+    -t  --dtitle        "New dialog title"     A text string which will show in dialog header
+    -b  --btntext       "New btn label"        This text will show on Accept button, i.e. you can rename this button
+    -x  --sizex         window_width           This parameter allow you to customize window width (default 500 pixels, minimum 300)
+    -y  --sizey         window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120)
     -h	--help		Will show help and exit
 
 Examples:
 
-query-file-name --message "Please select a source file name"
-query-file-name -m "Please select an image file" -f "*.png *.bmp ;; *.jpg *.gif"
-query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!"
-query-file-name --message "Please select a source file name" --directory "/opt/share"
-query-file-name --help
+./query-file-name --message "Please select a source file name"
+./query-file-name -m "Please select an image file" -f "*.png *.bmp ;; *.jpg *.gif"
+./query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!"
+./query-file-name --message "Please select a source file name" --directory "/opt/share"
+./query-file-name -x 700 -y 200 --message "<h3>Please select a source file name. We will use it for our processing.</h3><br><i>You also can provide file name manually, just populate prompt string.</i>" --directory "/opt/share"
+./query-file-name --help
+

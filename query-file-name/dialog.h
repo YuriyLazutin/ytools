@@ -28,6 +28,8 @@ class Dialog : public QDialog
       //QSpacerItem *horizontalSpacerRight;
     QString  sFileMask;
     QString  sBaseDir;
+    unsigned int uWidth;
+    unsigned int uHeight;
   public:
     Dialog(QWidget *parent = nullptr);
     ~Dialog();
@@ -36,6 +38,8 @@ class Dialog : public QDialog
     void SetAcceptButtonText(const char* txt);
     void SetFileMask(const char* fmask);
     void SetBaseDirectory(const char* bdir);
+    void SetSizeX(const unsigned int sx);
+    void SetSizeY(const unsigned int sy);
   public slots:
     void QueryFileDlg();
     void BtnAcceptClicked();

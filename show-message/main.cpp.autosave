@@ -15,19 +15,15 @@ int main(int argc, char** argv)
     int next_option;
 
     // String with possible short options
-    const char* const short_options = "hm:f:d:t:b:x:y:";
+    const char* const short_options = "hm:t:b:x:y:";
 
     // Array with possible long options.
     const struct option long_options[] =
     {
         { "help", no_argument, NULL, 'h' },
         { "message", required_argument, NULL, 'm' },
-        { "file-mask", required_argument, NULL, 'f' },
-        { "directory", required_argument, NULL, 'd' },
         { "dtitle", required_argument, NULL, 't' },
         { "btntext", required_argument, NULL, 'b' },
-        { "sizex", required_argument, NULL, 'x' },
-        { "sizey", required_argument, NULL, 'y' },
         { NULL, 0, NULL, 0 }
     };
 
@@ -44,33 +40,13 @@ int main(int argc, char** argv)
             case 'm':
                       w.SetMessageText(optarg);
                       break;
-            // -f or --file-mask
-            case 'f':
-                      w.SetFileMask(optarg);
-                      break;
-            // -d or --directory
-            case 'd':
-                      w.SetBaseDirectory(optarg);
-                      break;
             // -t or --dtitle
             case 't':
                       w.SetWindowTitle(optarg);
                       break;
             // -b or --btntext
             case 'b':
-                      w.SetAcceptButtonText(optarg);
-                      break;
-            // -x or --sizex
-            case 'x':
-                      unsigned int x;
-                      x=atoi(optarg);
-                      w.SetSizeX(x);
-                      break;
-            // -y or --sizey
-            case 'y':
-                      unsigned int y;
-                      y=atoi(optarg);
-                      w.SetSizeY(y);
+                      w.SetButtonText(optarg);
                       break;
             // Incorrect option
             case '?':
@@ -93,14 +69,12 @@ int main(int argc, char** argv)
 // Print help message and exit.
 void print_help()
 {
-    fprintf(stdout, "*** query-file-name - a simple program which allow you to use query dialog for select a file name. ***\n\n");
+    fprintf(stdout, "*** show-message - simple program which show dialog with custom text message. ***\n\n");
     fprintf(stdout, "Usage: %s [options] \n", program_name);
     fprintf(stdout, "%4s, %-30s %s\n", "-h", "--help", "Display this help and exit.");
-    fprintf(stdout, "%4s, %-30s %s\n", "-m", "--message \"Clarifying text\"", "Text string which will show in dialog (default \"Please specify a file name\"). Please use it for clarifying you request. You can use HTML markup language for better view.");
-    fprintf(stdout, "%4s, %-30s %s\n", "-f", "--file-mask \"*.ext\"", "A filter mask witch will used during file selection. For example you can allow to select only *.dat files.");
-    fprintf(stdout, "%4s, %-30s %s\n", "-d", "--directory \"/base/directory\"", "In this directory initially will open query file dialog.");
-    fprintf(stdout, "%4s, %-30s %s\n", "-t", "--dtitle \"New dialog title\"", "This text will show in dialog header (default \"Query file name\").");
-    fprintf(stdout, "%4s, %-30s %s\n", "-b", "--btntext \"New btn label\"", "Accept button will labeled with this text (default \"Accept\").");
+    fprintf(stdout, "%4s, %-30s %s\n", "-m", "--message \"Text message\"", "Text string which will show in dialog (default \"Message Text\"). You can use HTML markup language for better view.");
+    fprintf(stdout, "%4s, %-30s %s\n", "-t", "--dtitle \"Dialog title\"", "This text will show in dialog header (default \"Message\").");
+    fprintf(stdout, "%4s, %-30s %s\n", "-b", "--btntext \"Ok\"", "Button will labeled with this text (default \"Ok\").");
     fprintf(stdout, "%4s, %-30s %s\n", "-x", "--sizex window_width", "This parameter allow you to customize window width (default 500 pixels, minimum 300).");
     fprintf(stdout, "%4s, %-30s %s\n", "-y", "--sizey window_height", "This parameter allow you to customize window height (default 120 pixels, minimum 120).");
 }

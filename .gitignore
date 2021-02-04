@@ -15,3 +15,6 @@ Profile
 # Backup css and html files
 *.css~
 *.html~
+
+# autosaves
+*.autosave

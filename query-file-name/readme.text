@@ -17,7 +17,7 @@ Examples:
 ./query-file-name --message "Please select a source file name"
 ./query-file-name -m "Please select an image file" -f "*.png *.bmp ;; *.jpg *.gif"
 ./query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!"
-./query-file-name --message "Please select a source file name" --directory "/opt/share"
-./query-file-name -x 700 -y 200 --message "<h3>Please select a source file name. We will use it for our processing.</h3><br><i>You also can provide file name manually, just populate prompt string.</i>" --directory "/opt/share"
+./query-file-name --message "Please select a source file name" --directory "/usr/share/src"
+./query-file-name -x 700 -y 200 --message "<h3>Please select a source file name. We will use it for our processing.</h3><br><i>You also can provide file name manually, just populate prompt string.</i>" --directory "/usr/share/src"
 ./query-file-name --help
 

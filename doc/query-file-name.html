@@ -45,19 +45,21 @@
         <td valign="top" style="width: 68%; border-radius: 10px 10px; border: 1px solid black; padding: 20px;">
           <h2>ytools-query-file-name</h2>
           <article>
-            <p><span class="letter">T</span>his tool will show a dialog in which you can specify a file name, or you can use a standard "Open File"-dialog to select a file.
+            <p><span class="letter">T</span>his tool will show a dialog in which you can specify a file name, or you can use a standard "Open File" dialog to select a file.
                   This file name will returned back to requesting program. Also you can specify a message text to clarify you request for user.
                   All parameters should be provided via command line.
             <br><br>
             <h3>Options:</h3>
             <table class="topt">
-              <tr><th style="width: 10%;">Short</th><th style="width: 15%;">Long</th><th>Description</th></tr>
-              <tr><td align="center">-m</td><td>--message</td><td>A text message, it should clarify you request</td></tr>
-              <tr><td align="center">-f</td><td>--file-mask</td><td>A filter mask witch will used during file selection. For example you can allow to select only *.dat files</td></tr>
-              <tr><td align="center">-d</td><td>--directory</td><td>A base directory. In this directory initially will open query file dialog</td></tr>
-              <tr><td align="center">-t</td><td>--dtitle</td><td>A text string which will show in dialog header</td></tr>
-              <tr><td align="center">-b</td><td>--btntext</td><td>This text will show on Accept button, i.e. you can rename this button</td></tr>
+              <tr><th style="width: 10%;">Short</th><th style="width: 20%;">Long</th><th>Description</th></tr>
               <tr><td align="center">-h</td><td>--help</td><td>Will show help and exit</td></tr>
+              <tr><td align="center">-m</td><td>--message "Clarifying text"</td><td>A text message, it should clarify you request</td></tr>
+              <tr><td align="center">-f</td><td>--file-mask "*.ext"</td><td>A filter mask witch will used during file selection. For example you can allow to select only *.dat files</td></tr>
+              <tr><td align="center">-d</td><td>--directory "/base/directory"</td><td>A base directory. In this directory initially will open query file dialog</td></tr>
+              <tr><td align="center">-t</td><td>--dtitle "New dialog title"</td><td>A text string which will show in dialog header</td></tr>
+              <tr><td align="center">-b</td><td>--btntext "New btn label"</td><td>This text will show on "Accept" button, i.e. you can rename this button</td></tr>
+              <tr><td align="center">-x</td><td>--sizex window_width</td><td>This parameter allow you to customize window width (default 500 pixels, minimum 300)</td></tr>
+              <tr><td align="center">-y</td><td>--sizey window_height</td><td>This parameter allow you to customize window height (default 120 pixels, minimum 120)</td></tr>
             </table>
            <br>
            <h3>Examples:</h3>
@@ -65,56 +67,90 @@
            <code>
              #!/bin/bash<br>
              # some actions here<br>
-             $(ytools-query-file-name --message "Please select a source file name")<br>           
+             file_name=$(ytools-query-file-name --message "Please select a source file name")<br>
+             echo "You selected the following file: " ${file_name}<br>
            </code>
            <br>As a result following window will appear:<br><br>
            <img src="query-file-name-01.png" align="center">
-            
            <br><br>
+           
            <h4>Query an image file</h4>
            Files can be png, bmp, jpg or gif format. File formats are divided on 2 groups - lossless and lossy.<br><br>
            <code>
              #!/bin/bash<br>
              # some actions here<br>
-             $(ytools-query-file-name -m "Please select an image file" -f "*.png *.bmp ;; *.jpg *.gif")<br>           
+             file_name=$(ytools-query-file-name -m "Please select an image file" -f "*.png *.bmp ;; *.jpg *.gif")<br>
+             # Make a thumbnail<br>
+             convert ${file_name} -resize 128x128 thumb_$(basename ${file_name})<br>
            </code>
            <br>As a result following window will appear:<br><br>
            <img src="query-file-name-02.png" align="center">
-            
            <br><br>
+           
            <h4>Query an jar archive</h4>
+           Dialog title will changed to "Extracting and fixing jar archive"<br>
+           Open file dialog will select *.jar files<br>
            Accept button will renamed to "Patch this!".<br><br>
            <code>
              #!/bin/bash<br>
              # some actions here<br>
-             $(ytools-query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!")<br>           
+             file_name=$(ytools-query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!" --dtitle "Extracting and fixing jar archive" )<br>
+             # extracting files<br>
+             jar -vxf ${file_name}<br>
+             # patching<br>
+             sed -i 's/\$BASE_LIB/ -Wl,--no-as-needed \$BASE_LIB/g' ./bin/install.sh<br>
+             # put patched file back to jar<br>
+             jar -vuf ${file_name} /bin/install.sh<br>
            </code>
            <br>As a result following window will appear:<br><br>
            <img src="query-file-name-03.png" align="center">
-            
-            
            <br><br>
-           <h4>Query any file</h4>
-           But if you will use query file dialog it will opened from /opt/share directory.<br><br>
+           
+           <h4>Change default directory and query any file</h4>
+           In this example query file dialog will opened from /usr/share/src directory.<br><br>
            <code>
              #!/bin/bash<br>
              # some actions here<br>
-             $(ytools-query-file-name --message "Please select a source file name" --directory "/opt/share")<br>           
+             file_name=$(ytools-query-file-name --message "Please select a source file name" --directory "/usr/share/src")<br>
+             echo "You selected the following file: " ${file_name}<br>
            </code>
            <br>As a result following window will appear:<br><br>
            <img src="query-file-name-04.png" align="center">
-            
-            
            <br><br>
+           
+           <h4>Advanced using</h4>
+           In this example we are using HTML markup language to improve out text request. Also we changing window size for better view and setting up default directory to "/usr/src"<br><br>
+           <code>
+             #!/bin/bash<br>
+             # some actions here<br>
+             file_name=$(ytools-query-file-name -x 700 -y 200 --message "&lt;h3&gt;Please select a source file name. We will use it for our processing.&lt;/h3&gt;&lt;br&gt;&lt;i&gt;You also can provide file name manually, just populate prompt string.&lt;/i&gt;" --directory "/usr/src")<br>
+             echo "You selected the following file: " ${file_name}<br>
+             # Other actions with selected file<br>
+           </code>
+           <br>As a result following window will appear:<br><br>
+           <img src="query-file-name-05.png" align="center">
+           <br><br>
+           
            <h4>Show help</h4>
            This command will show a help message.<br><br>
            <code>
              ytools-query-file-name --help<br>
-             <br>As a result following information will shown:<br><br>
-             <br>
-             ...<br>           
            </code>
-            
+           <br>As a result following information will shown:<br><br>
+<pre style="font-family: Courier;">
+*** ytools-query-file-name - a simple program which allow you to use query dialog for select a file name. ***
+
+Usage: ./ytools-query-file-name [options] 
+  -h, --help                         Display this help and exit.
+  -m, --message "Clarifying text"    Text string which will show in dialog (default "Please specify a file name"). Please use it for clarifying you request. You can use HTML markup language for better view.
+  -f, --file-mask "*.ext"            A filter mask witch will used during file selection. For example you can allow to select only *.dat files.
+  -d, --directory "/base/directory"  In this directory initially will open query file dialog.
+  -t, --dtitle "New dialog title"    This text will show in dialog header (default "Query file name").
+  -b, --btntext "New btn label"      Accept button will labeled with this text (default "Accept").
+  -x, --sizex window_width           This parameter allow you to customize window width (default 500 pixels, minimum 300).
+  -y, --sizey window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120).
+</pre>
+           
           </article>    
         </td>
         <td style="width: 10%;"></td>

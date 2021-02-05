@@ -12,9 +12,10 @@ Profile
 # Executables
 
 
-# Backup css and html files
+# Backup css, text and html files
 *.css~
 *.html~
+*.text~
 
 # autosaves
 *.autosave

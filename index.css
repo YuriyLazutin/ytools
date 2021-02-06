@@ -77,7 +77,16 @@ img {
   margin-left: auto;
   margin-right: auto
 }
-    
+
+/* Lists */
+li {
+  list-style-type: none; /* remove markers */
+}
+ul {
+  margin-left: 0; /* IE, Opera */
+  padding-left: 0; /* Firefox, Safari, Chrome */
+}
+
 footer {
   display:block;
   clear:both;

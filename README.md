@@ -11,5 +11,7 @@ But at the same time, the author does not give any guarantees for the operation 
 This program is licensed under "GNU GENERAL PUBLIC LICENSE Version 3" which you can find in the root program directory.
 
 Today YTOOLS included following programs:
+
 ytools-query-file-name - this is a simple program which allow you to use query dialog for select a file name.
+
 ytools-show-message - this tool allow you to include message boxes into you scripts

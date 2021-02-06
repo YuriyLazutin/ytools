@@ -5,19 +5,19 @@
     <meta http-equiv="content-type" content="text/html">
     <meta name="author" content="Yuriy Lazutin" >
     <meta name="description" content="ytools - documentation">
-    <meta name="keywords" content="Yuriy Lazutin, ytools, you tools, programming">
+    <meta name="keywords" content="Yuriy Lazutin, ytools, your tools, programming">
     <meta name="revisit-after" content="7 days">
     <meta name="distribution" content="Global">
 <!--
     <meta name="robots" content="index,follow">
 -->
-    <title>ytools - this is you tools</title>
+    <title>ytools - this is your tools</title>
     <link rel="stylesheet" type="text/css" href="../index.css">
   </head>
   
   <body
     bgproperties="fixed"
-    onload="window.defaultStatus='ytools - this is you tools'"
+    onload="window.defaultStatus='ytools - this is your tools'"
     alink="#48298C"
     link="#48298C"
     vlink="#780078"
@@ -30,7 +30,7 @@
           <td style="width: 5%;"></td>
           <td style="width: 30%;"> <img src="ytools-header.png"></td>
           <td style="width: 5%;"></td>
-          <td><H1>- this is you tools</H1></td>
+          <td><H1>- this is your tools</H1></td>
           <td style="width: 5%;"></td>
         </tr>
       </table>
@@ -45,15 +45,77 @@
         <td valign="top" style="width: 68%; border-radius: 10px 10px; border: 1px solid black; padding: 20px;">
           <h2>ytools-show-message</h2>
           <article>
-            <p><span class="letter">T</span>his tool provide you a simple way to include message boxes into you shell scripts.
+            <p><span class="letter">T</span>his tool provide you a simple way to include message boxes into your shell scripts.
+             This tool will show a message box. Message text should be provided via command line.
+             You can show as a simple text messages, as a messages in html format.
             <br><br>
+            <h3>Options:</h3>
+            <table class="topt">
+              <tr><th style="width: 10%;">Short</th><th style="width: 25%;">Long</th><th>Description</th></tr>
+              <tr><td align="center">-h</td><td>--help</td><td>Will show help and exit</td></tr>
+              <tr><td align="center">-m</td><td>--message "Your text message"</td><td>Text string which will show in dialog (default "Message Text"). You can use HTML markup language for better view.</td></tr>
+              <tr><td align="center">-t</td><td>--dtitle "New dialog title"</td><td>A text string which will show in dialog header (default "Message").</td></tr>
+              <tr><td align="center">-b</td><td>--btntext "New button label"</td><td>"Ok" button will labeled with this text (default "Ok"). I.e. you can rename this button.</td></tr>
+              <tr><td align="center">-x</td><td>--sizex window_width</td><td>This parameter allow you to customize window width (default 300 pixels, minimum 300)</td></tr>
+              <tr><td align="center">-y</td><td>--sizey window_height</td><td>This parameter allow you to customize window height (default 120 pixels, minimum 120)</td></tr>
+            </table>
+            <br>
+            <h3>Examples:</h3>
+            <h4>Show a simple text message in dialog box</h4>
+            In this example we will show a simple text message.<br><br>
             <code>
-             #!/bin/bash<br>
-             # some actions here<br>
-             $(ytools-show-message --message "You operations was completed.")<br>           
+              <font class="code_comment">#!/bin/bash<br>
+              # some actions here<br></font>  
+              $(ytools-show-message --message "Your job was completed successfully.")<br>           
             </code>
             <br>As a result following window will appear:<br><br>
-            <img src="show-message-01.png" align="center">
+            <img src="show-message-01.png">
+            <br><br>
+            
+            <h4>Advanced using</h4>
+            In this example we will use a few abilities. We change dialog title, we will use a HTML in our message, and we will rename "Ok" button.<br><br>
+            <code>
+              <font class="code_comment">#!/bin/bash<br>
+              # some actions here<br></font>
+              $(ytools-show-message -t "I want to say you something..."  -m "&lt;b&gt;I notice,&lt;br&gt;that you are a very good person! &lt;/b&gt;" --btntext "I agree")<br>
+              <font class="code_comment"># other actions...<br></font>
+            </code>
+            <br>As a result following window will appear:<br><br>
+            <img src="show-message-02.png">
+            <br><br>
+            
+            <h4>Customizing window size</h4>
+            In this example, our message was too long to fit well in the window. We just set the correct size.<br><br>
+            <code>
+              <font class="code_comment">#!/bin/bash<br>
+              # some actions here<br></font>
+              $(ytools-show-message --sizex 600 --sizey 250 --message "&lt;h3&gt;Your operation was completed successfully.&lt;/h3&gt;Now you can safely pour yourself a cup of tea and enjoy the work done.&lt;br&gt;Thanks for using our program friend.&lt;br&gt;&lt;i&gt;(c) Your company dot com&lt;/i&gt;")<br>
+              <font class="code_comment"># other actions...<br></font>
+            </code>
+            <br>As a result following window will appear:<br><br>
+            <img src="show-message-03.png">
+            <br><br>
+
+            <h4>Show help</h4>
+            This command will show a help message.<br><br>
+            <code>
+              <br>
+              ytools-show-message --help<br>
+              <br>
+            </code>
+            <br>As a result following information will shown:<br><br>
+<pre style="white-space: pre-wrap; font-family: Courier;">
+*** ytools-show-message - simple program which show dialog with custom text message. ***
+
+Usage: ./ytools-show-message [options] 
+  -h, --help                         Display this help and exit.
+  -m, --message "Text message"       Text string which will show in dialog (default "Message Text"). You can use HTML markup language for better view.
+  -t, --dtitle "Dialog title"        This text will show in dialog header (default "Message").
+  -b, --btntext "Ok"                 Button will labeled with this text (default "Ok").
+  -x, --sizex window_width           This parameter allow you to customize window width (default 300 pixels, minimum 300).
+  -y, --sizey window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120).
+</pre>
+           
           </article>    
         </td>
         <td style="width: 10%;"></td>

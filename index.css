@@ -68,6 +68,16 @@ code{
   text-shadow: 0 0 0;
 }
 
+.code_comment {
+  color: rgb(0, 64, 0);
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+    
 footer {
   display:block;
   clear:both;

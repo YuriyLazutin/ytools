@@ -12,6 +12,6 @@ Options:
 Examples:
 
 ./show-message --help
-./show-message --message "You job was completed successfully."
+./show-message --message "Your job was completed successfully."
 ./show-message -t "I want to say you something..."  -m "<b>I notice,<br>that you are a very good person! </b>" --btntext "I agree"
 ./show-message --sizex 600 --sizey 250 --message "<h3>You operation was completed successfully.</h3>Now you can safely pour yourself a cup of tea and enjoy the work done.<br>Thanks for using our program friend.<br><i>(c) Your company dot com</i>"

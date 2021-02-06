@@ -54,7 +54,10 @@ h2 {
     text-shadow: 0 0 0;
     padding: 3px;
 }
-
+pre {
+	    /* overflow: auto; */
+	    white-space: pre-wrap;
+	}
 
 code{
   display: block;

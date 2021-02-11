@@ -12,6 +12,8 @@ This program is licensed under "GNU GENERAL PUBLIC LICENSE Version 3" which you 
 
 Today YTOOLS included following programs:
 
+query-directory-name - this is a simple program which allow you to use query dialog for select a directory name.
+
 ytools-query-file-name - this is a simple program which allow you to use query dialog for select a file name.
 
-ytools-show-message - this tool allow you to include message boxes into you scripts
+ytools-show-message - this tool allow you to include message boxes into you scripts.

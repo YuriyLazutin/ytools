@@ -1,0 +1,21 @@
+query-directory-name - this tool will show a dialog in which you can specify a directory name, or you can use a standard "Open Directory"-dialog to select a directory.
+                       This directory name will returned back to requesting program. Also you can specify a message text to clarify you request for user.
+                       All parameters should be provided via command line.
+
+Options:
+    -m	--message	"Clarifying text"      A text message, it should clarify you request
+    -d  --directory     "/base/directory"      A base directory. In this directory initially will open query file dialog. This parameter can be used to set up a default value
+    -t  --dtitle        "New dialog title"     A text string which will show in dialog header
+    -b  --btntext       "New btn label"        This text will show on Accept button, i.e. you can rename this button
+    -x  --sizex         window_width           This parameter allow you to customize window width (default 500 pixels, minimum 300)
+    -y  --sizey         window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120)
+    -h	--help		Will show help and exit
+
+Examples:
+
+./query-directory-name --message "Please select a target directory"
+./query-directory-name -m "Please select directory for scanning" --btntext "Start scan"
+./query-directory-name --message "Please select a source directory" --directory "/usr/src"
+./query-directory-name -x 700 -y 200 --message "<h3>Please select a directory with image files. We will use it to assemble a result video.</h3><br><i>After processing a new file result.avi will appears.</i>" --directory "${HOME}/Documents"
+./query-directory-name --help
+

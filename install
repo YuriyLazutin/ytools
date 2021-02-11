@@ -37,7 +37,10 @@ make -f Makefile qmake_all
 make -j8
 
 sudo mkdir -p "${YTOOLS_HOME}"
-sudo cp "show-message/show-message" "${YTOOLS_HOME}/show-message"
-sudo ln -s "${YTOOLS_HOME}/show-message" "${LBIN}/ytools-show-message"
+sudo cp "query-directory-name/query-directory-name" "${YTOOLS_HOME}/query-directory-name"
+sudo ln -s "${YTOOLS_HOME}/query-directory-name" "${LBIN}/ytools-query-directory-name"
 sudo cp "query-file-name/query-file-name" "${YTOOLS_HOME}/query-file-name"
 sudo ln -s "${YTOOLS_HOME}/query-file-name" "${LBIN}/ytools-query-file-name"
+sudo cp "show-message/show-message" "${YTOOLS_HOME}/show-message"
+sudo ln -s "${YTOOLS_HOME}/show-message" "${LBIN}/ytools-show-message"
+

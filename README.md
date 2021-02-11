@@ -16,4 +16,6 @@ query-directory-name - this is a simple program which allow you to use query dia
 
 ytools-query-file-name - this is a simple program which allow you to use query dialog for select a file name.
 
+ytools-query-yesno - this is a simple program that allows you to ask a simple questions, the answer to which can be "yes" or "no".
+
 ytools-show-message - this tool allow you to include message boxes into you scripts.

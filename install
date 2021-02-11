@@ -41,6 +41,8 @@ sudo cp "query-directory-name/query-directory-name" "${YTOOLS_HOME}/query-direct
 sudo ln -s "${YTOOLS_HOME}/query-directory-name" "${LBIN}/ytools-query-directory-name"
 sudo cp "query-file-name/query-file-name" "${YTOOLS_HOME}/query-file-name"
 sudo ln -s "${YTOOLS_HOME}/query-file-name" "${LBIN}/ytools-query-file-name"
+sudo cp "query-yesno/query-yesno" "${YTOOLS_HOME}/query-yesno"
+sudo ln -s "${YTOOLS_HOME}/query-yesno" "${LBIN}/ytools-query-yesno"
 sudo cp "show-message/show-message" "${YTOOLS_HOME}/show-message"
 sudo ln -s "${YTOOLS_HOME}/show-message" "${LBIN}/ytools-show-message"
 

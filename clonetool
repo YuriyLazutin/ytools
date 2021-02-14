@@ -1,0 +1,51 @@
+#!/bin/bash
+
+YTOOLS_BUILDS="./Release"
+SOURCE_TOOL=$( ${YTOOLS_BUILDS}/query-directory-name/query-directory-name --message "Please select an existing tool directory")
+SOURCE_TOOL_NAME=$( basename "${SOURCE_TOOL}")
+TARGET_TOOL_NAME=$( ${YTOOLS_BUILDS}/query-parameter/query-parameter --message "Please enter a new tool name" )
+
+# Creating directories
+for dir_name in $(find "${SOURCE_TOOL}" -type d -print); do
+  target_dir_name=$( echo "${dir_name}" | sed "s/${SOURCE_TOOL_NAME}/${TARGET_TOOL_NAME}/g" )
+  echo -n "Creating directory ${target_dir_name}: "
+  mkdir -p "${target_dir_name}"
+  if [ $? -eq 0 ]; then
+    echo -e "\033[1;32mDone\033[0m"
+  fi
+done
+
+# Creating files
+for file_name in $(find "${SOURCE_TOOL}" -type f -print); do
+  target_file_name=$( echo "${file_name}" | sed "s/${SOURCE_TOOL_NAME}/${TARGET_TOOL_NAME}/g" )
+  echo -n "Creating file ${target_file_name}: "
+  cp "${file_name}" "${target_file_name}"
+  if [ $? -eq 0 ]; then
+    echo -e "\033[1;32mDone\033[0m"
+  fi
+  # Patching files
+  echo -n "Patching file ${target_file_name}: "
+  sed -i "s/${SOURCE_TOOL_NAME}/${TARGET_TOOL_NAME}/g" "${target_file_name}"
+  if [ $? -eq 0 ]; then
+    echo -e "\033[1;32mDone\033[0m"
+  fi
+
+done
+
+
+# Cloning documentation
+for file_name in $(find "./doc" -type f -name "*${SOURCE_TOOL_NAME}*" -print); do
+  target_file_name=$( echo "${file_name}" | sed "s/${SOURCE_TOOL_NAME}/${TARGET_TOOL_NAME}/g" )
+  echo -n "Creating file ${target_file_name}: "
+  cp "${file_name}" "${target_file_name}"
+  if [ $? -eq 0 ]; then
+    echo -e "\033[1;32mDone\033[0m"
+  fi
+  # Patching files
+  echo -n "Patching file ${target_file_name}: "
+  sed -i "s/${SOURCE_TOOL_NAME}/${TARGET_TOOL_NAME}/g" "${target_file_name}"
+  if [ $? -eq 0 ]; then
+    echo -e "\033[1;32mDone\033[0m"
+  fi
+
+done

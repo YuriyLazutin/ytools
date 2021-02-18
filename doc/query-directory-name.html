@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <meta http-equiv="content-type" content="text/html">
+    <meta name="author" content="Yuriy Lazutin" >
+    <meta name="description" content="ytools - documentation">
+    <meta name="keywords" content="Yuriy Lazutin, ytools, your tools, programming">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="Global">
+<!--
+    <meta name="robots" content="index,follow">
+-->
+    <title>ytools - this is your tools</title>
+    <link rel="stylesheet" type="text/css" href="../index.css">
+  </head>
+  
+  <body
+    bgproperties="fixed"
+    onload="window.defaultStatus='ytools - this is your tools'"
+    alink="#48298C"
+    link="#48298C"
+    vlink="#780078"
+    style="width: 100%;"
+  >
+
+    <header>
+      <table class="pghead">
+        <tr>
+          <td style="width: 5%;"></td>
+          <td style="width: 30%;"> <img src="ytools-header.png"></td>
+          <td style="width: 5%;"></td>
+          <td><H1>- this is your tools</H1></td>
+          <td style="width: 5%;"></td>
+        </tr>
+      </table>
+    </header>
+ 
+    <br>
+    
+    <!-- Central -->
+    <table class="tb">
+      <tr>
+        <td style="width: 10%;"></td>
+        <td valign="top" style="width: 68%; border-radius: 10px 10px; border: 1px solid black; padding: 20px;">
+          <h2>ytools-query-directory-name</h2>
+          <article>
+            <p><span class="letter">T</span>his tool will show a dialog in which you can specify a directory name, or you can use a standard "Open Directory"-dialog to select a directory.
+                       This directory name will returned back to requesting program. Also you can specify a message text to clarify you request for user.
+                       All parameters should be provided via command line.
+            <br><br>
+            <h3>Options:</h3>
+            <table class="topt">
+              <tr><th style="width: 10%;">Short</th><th style="width: 20%;">Long</th><th>Description</th></tr>
+              <tr><td align="center">-h</td><td>--help</td><td>Will show help and exit</td></tr>
+              <tr><td align="center">-m</td><td>--message "Clarifying text"</td><td>A text message, it should clarify your request</td></tr>
+              <tr><td align="center">-d</td><td>--directory "/base/directory"</td><td>A base directory. In this directory initially will open query directory dialog. This parameter can be used to set up a default value</td></tr>
+              <tr><td align="center">-t</td><td>--dtitle "New dialog title"</td><td>A text string which will show in dialog header</td></tr>
+              <tr><td align="center">-b</td><td>--btntext "New btn label"</td><td>This text will show onto "Accept" button, i.e. you can rename this button</td></tr>
+              <tr><td align="center">-x</td><td>--sizex window_width</td><td>This parameter allow you to customize window width (default 500 pixels, minimum 300)</td></tr>
+              <tr><td align="center">-y</td><td>--sizey window_height</td><td>This parameter allow you to customize window height (default 120 pixels, minimum 120)</td></tr>
+            </table>
+            <br>
+            <h3>Examples:</h3>
+            <h4>Simple query directory</h4>
+            <code>
+              <font class="code_comment">#!/bin/bash<br>
+              # some actions here<br></font>
+              dir_name=$(ytools-query-directory-name --message "Please select a target directory")<br>
+              echo "You selected the following directory: " ${dir_name}<br>
+            </code>
+            <br>As a result following window will appear:<br><br>
+            <img src="query-directory-name-01.png" align="center">
+            <br>
+            <p>In this window you can directly print the path to directory in edit field or you can click on the "Open Directory" picture and use the standard "Open Directory" dialog to choose it.
+            <br><br>
+           
+            <h4>Query a directory for searching something in it</h4>
+            In this example the "Accept" button will renamed to "Start scan".<br><br>
+            <code>
+              <font class="code_comment">#!/bin/bash<br>
+              # some actions here<br></font>
+              dir_name=$(ytools-query-directory-name -m "Please select directory for scanning" --btntext "Start scan")<br>
+              <font class="code_comment"># Searching *.text files with string "ytools"<br></font>
+              for file_name in $(find "${dir_name}" -name "*.text" -print); do<br>
+              &nbsp&nbsp grep -i "ytools" "${file_name}"<br>
+              done<br>
+            </code>
+            <br>As a result following window will appear:<br><br>
+            <img src="query-directory-name-02.png" align="center">
+            <br><br>
+           
+            <h4>Query a directory with source files</h4>
+            In this example we requesting a directory with source files.
+            This files will used as template for creating a new copy with some differences.
+            For example we will change a few word in target files. 
+            We will setting up a default directory, in order to make it easier for the user.
+            Accept button will renamed to "Clone".<br><br>
+            <code>
+              <font class="code_comment">#!/bin/bash<br>
+              # some actions here<br></font>
+              dir_name=$(ytools-query-directory-name --message "Please select a source directory" --directory "/usr/src" --btntext "Clone" )<br>
+              <br>
+              <font class="code_comment"># Creating a clone<br></font>
+              new_dir_name=$( dirname "${dir_name}" )"/clone"<br>
+              cp --recursive "${dir_name}" "${new_dir_name}"<br>
+              cd "${new_dir_name}"<br>
+              <br>
+              <font class="code_comment"># Changing *.cpp files<br></font>
+              for file_name in $(find . -type f -print); do<br>
+              &nbsp&nbsp file_ext="${file_name##*.}"<br>
+              &nbsp&nbsp if [ "${file_ext,,}" == "cpp" ]; then<br>
+              &nbsp&nbsp &nbsp&nbsp sed -i 's/old_class_name/new_class_name/g' "${file_name}"<br>
+              &nbsp&nbsp fi<br>
+              done<br>
+            </code>
+            <br>As a result following window will appear:<br><br>
+            <img src="query-directory-name-03.png" align="center">
+            <br><br>
+           
+            <h4>Advanced using</h4>
+            In this example we are using HTML markup language to improve out text request. 
+            Also we changing window size for better view and setting up default directory to "${HOME}/Documents"<br><br>
+            <code>
+              <font class="code_comment">#!/bin/bash<br>
+              # some actions here<br></font>
+              dir_name=$(ytools-query-directory-name -x 700 -y 230 --message "&lt;h3&gt;Please select a directory with image files.&lt;/h3&gt;We will use it to assemble a result video.&lt;br&gt;&lt;br&gt;&lt;i&gt;After processing a new file result.mov will appears.&lt;/i&gt;" --directory "${HOME}/Documents")<br>
+              echo "You selected the following directory: " ${dir_name}<br>
+              <br>
+              <font class="code_comment"># Creating video<br></font>
+              cd "${dir_name}"<br>
+              ffmpeg -r 30 -i "%07d.png" -pix_fmt argb -vcodec qtrle result.mov<br>
+            </code>
+            <br>As a result following window will appear:<br><br>
+            <img src="query-directory-name-04.png" align="center">
+            <br><br>
+           
+            <h4>Show help</h4>
+            This command will show a help message.<br><br>
+            <code>
+              <br>
+              ytools-query-directory-name --help<br>
+              <br>
+            </code>
+            <br>As a result following information will shown:<br><br>
+<pre style="font-family: Courier;">
+*** query-directory-name - a simple program which allow you to use query dialog for select a directory name. ***
+
+Usage: ./query-directory-name [options] 
+  -h, --help                         Display this help and exit.
+  -m, --message "Clarifying text"    Text string which will show in dialog (default "Please select a directory"). Please use it for clarifying you request. You can use HTML markup language for better view.
+  -d, --directory "/base/directory"  In this directory initially will open query directory dialog.  This parameter can be used to set up a default value.
+  -t, --dtitle "New dialog title"    This text will show in dialog header (default "Query directory").
+  -b, --btntext "New btn label"      Accept button will labeled with this text (default "Accept").
+  -x, --sizex window_width           This parameter allow you to customize window width (default 500 pixels, minimum 300).
+  -y, --sizey window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120).
+</pre>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          </article>    
+        </td>
+        <td style="width: 10%;"></td>
+      </tr>
+    </table>
+
+  </body>
+</html>

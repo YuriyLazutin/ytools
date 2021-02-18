@@ -4,9 +4,9 @@ query-directory-name - this tool will show a dialog in which you can specify a d
 
 Options:
     -m	--message	"Clarifying text"      A text message, it should clarify you request
-    -d  --directory     "/base/directory"      A base directory. In this directory initially will open query file dialog. This parameter can be used to set up a default value
+    -d  --directory     "/base/directory"      A base directory. In this directory initially will open query directory dialog. This parameter can be used to set up a default value
     -t  --dtitle        "New dialog title"     A text string which will show in dialog header
-    -b  --btntext       "New btn label"        This text will show on Accept button, i.e. you can rename this button
+    -b  --btntext       "New btn label"        This text will show onto Accept button, i.e. you can rename this button
     -x  --sizex         window_width           This parameter allow you to customize window width (default 500 pixels, minimum 300)
     -y  --sizey         window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120)
     -h	--help		Will show help and exit

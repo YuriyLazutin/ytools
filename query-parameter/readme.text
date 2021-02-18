@@ -9,7 +9,7 @@ Options:
     -t  --dtitle        "New dialog title"     A text string which will show in dialog header
     -c  --data-type     "Data type"            A type of requesting data. It can be: "string", "integer", "float", "double" or "date"
     -d	--data-mask	"Regular expression"   A filter mask in regexp format which will used during data validation
-    -b  --btntext       "New btn label"        This text will show on "Accept" button, i.e. you can rename this button
+    -b  --btntext       "New btn label"        This text will show onto "Accept" button, i.e. you can rename this button
     -x  --sizex         window_width           This parameter allow you to customize window width (default 300 pixels, minimum 300)
     -y  --sizey         window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120)
     -h	--help		                       Will show help and exit
@@ -18,8 +18,8 @@ Examples:
 
 ./query-parameter --message "Please enter a new file name" --data-type "string" --btntext "Save It!"
 ./query-parameter -m "What year were are you born?" --data-type "integer" --data-mask "^[1,2]{1}[0-9]{3}$"
-./query-parameter -m "Please enter a price" --data-type "float" --data-mask "[1-0]"
-./query-parameter --message "" --data-type "double" --data-mask "[1-0]"
+./query-parameter -m "Please enter a price" --data-type "float"
+./query-parameter --message "" --data-type "double"
 ./query-parameter --message "Please enter a day of your birth in format (YYYY\MM\DD)" --data-type "date" --data-mask "YYYY\MM\DD"
 ./query-parameter -x 700 -y 200 -t "New dialog title" --message "<h3>A long long header</h3><br>This is long long reasoning abount your request.<br><i>P.s. Bla-bla-bla</i>" --btntext "Remake"
 ./query-parameter --help

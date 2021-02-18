@@ -43,67 +43,63 @@
       <tr>
         <td style="width: 10%;"></td>
         <td valign="top" style="width: 68%; border-radius: 10px 10px; border: 1px solid black; padding: 20px;">
-          <h2>ytools-query-file-name</h2>
+          <h2>ytools-query-parameter</h2>
           <article>
-            <p><span class="letter">T</span>his tool will show a dialog in which you can specify a file name, or you can use a standard "Open File" dialog to select a file.
-                  This file name will returned back to requesting program. Also you can specify a message text to clarify your request for user.
-                  All parameters should be provided via command line.
+            <p><span class="letter">T</span>his tool allow you to request a different parameters in string format.
+            It can be strings, numbers, dates in specified format.
+            You can specify a special mask to reject inconsistent data, and you can specify a data type.
+            Also you can specify a message text to clarify you request for user.
+            The inputed parameter will returned back to requesting program.
+            All parameters should be provided via command line.
             <br><br>
             <h3>Options:</h3>
             <table class="topt">
               <tr><th style="width: 10%;">Short</th><th style="width: 20%;">Long</th><th>Description</th></tr>
               <tr><td align="center">-h</td><td>--help</td><td>Will show help and exit</td></tr>
-              <tr><td align="center">-m</td><td>--message "Clarifying text"</td><td>A text message, it should clarify your request</td></tr>
-              <tr><td align="center">-f</td><td>--file-mask "*.ext"</td><td>A filter mask witch will used during file selection. For example you can allow to select only *.dat files</td></tr>
-              <tr><td align="center">-d</td><td>--directory "/base/directory"</td><td>A base directory. In this directory initially will open query file dialog</td></tr>
+              <tr><td align="center">-m</td><td>--message "Clarifying text"</td><td>A text message, it should clarify you request. You can use HTML markups for better view</td></tr>
               <tr><td align="center">-t</td><td>--dtitle "New dialog title"</td><td>A text string which will show in dialog header</td></tr>
+              <tr><td align="center">-c</td><td>--data-type "Data type"</td><td>A type of requesting data. It can be: "string", "integer", "float", "double" or "date"</td></tr>
+              <tr><td align="center">-d</td><td>--data-mask	"Regular expression""</td><td>A filter mask in regexp format which will used during data validation</td></tr>
               <tr><td align="center">-b</td><td>--btntext "New btn label"</td><td>This text will show onto "Accept" button, i.e. you can rename this button</td></tr>
-              <tr><td align="center">-x</td><td>--sizex window_width</td><td>This parameter allow you to customize window width (default 500 pixels, minimum 300)</td></tr>
+              <tr><td align="center">-x</td><td>--sizex window_width</td><td>This parameter allow you to customize window width (default 300 pixels, minimum 300)</td></tr>
               <tr><td align="center">-y</td><td>--sizey window_height</td><td>This parameter allow you to customize window height (default 120 pixels, minimum 120)</td></tr>
             </table>
-           <br>
-           <h3>Examples:</h3>
-           <h4>Query any file</h4>
+            <br>
+            <h3>Examples:</h3>
+            <h4>Query file name</h4>
+            <code>
+              <font class="code_comment">#!/bin/bash<br>
+              # some actions here<br></font>
+              file_name=$(ytools-query-parameter --message "Please enter a new file name" --data-type "string" --btntext "Save It!")<br>
+              echo "You printed the following file name: " ${file_name}<br>
+            </code>
+            <br>As a result following window will appear:<br><br>
+            <img src="query-parameter-01.png" align="center">
+            <br><br>
+           
+           <h4>Query a year</h4>
+           Only four digits are acceptable. First digit in input should be 1 or 2.<br><br>
            <code>
              <font class="code_comment">#!/bin/bash<br>
              # some actions here<br></font>
-             file_name=$(ytools-query-file-name --message "Please select a source file name")<br>
-             echo "You selected the following file: " ${file_name}<br>
+             the_year=$(ytools-query-parameter -m "What year were are you born?" --data-type "integer" --data-mask "^[1,2]{1}[0-9]{3}$")<br>
+              echo "You printed the following year: " ${the_year}<br>
            </code>
            <br>As a result following window will appear:<br><br>
-           <img src="query-file-name-01.png" align="center">
+           <img src="query-parameter-02.png" align="center">
            <br><br>
            
-           <h4>Query an image file</h4>
-           Files can be png, bmp, jpg or gif format. File formats are divided on 2 groups - lossless and lossy.<br><br>
+           <h4>Query a price</h4>
+           Only float numbers are acceptable.<br><br>
            <code>
              <font class="code_comment">#!/bin/bash<br>
              # some actions here<br></font>
-             file_name=$(ytools-query-file-name -m "Please select an image file" -f "*.png *.bmp ;; *.jpg *.gif")<br>
-             <font class="code_comment"># Make a thumbnail<br></font>
-             convert ${file_name} -resize 128x128 thumb_$(basename ${file_name})<br>
+             price=$(ytools-query-parameter -m "Please enter a price" --data-type "float" )<br>
+             echo "You printed the following price: " ${price}<br>
+             <font class="code_comment"># operations with price<br></font>
            </code>
            <br>As a result following window will appear:<br><br>
-           <img src="query-file-name-02.png" align="center">
-           <br><br>
-           
-           <h4>Query an jar archive</h4>
-           Dialog title will changed to "Extracting and fixing jar archive"<br>
-           Open file dialog will select *.jar files<br>
-           Accept button will renamed to "Patch this!".<br><br>
-           <code>
-             <font class="code_comment">#!/bin/bash<br>
-             # some actions here<br></font>
-             file_name=$(ytools-query-file-name -m "Please select a bogous file" -f "*.jar" --btntext "Patch this!" --dtitle "Extracting and fixing jar archive" )<br>
-             <font class="code_comment"># extracting files<br></font>
-             jar -vxf ${file_name}<br>
-             <font class="code_comment"># patching<br></font>
-             sed -i 's/\$BASE_LIB/ -Wl,--no-as-needed \$BASE_LIB/g' ./bin/install.sh<br>
-             <font class="code_comment"># put patched file back to jar<br></font>
-             jar -vuf ${file_name} /bin/install.sh<br>
-           </code>
-           <br>As a result following window will appear:<br><br>
-           <img src="query-file-name-03.png" align="center">
+           <img src="query-parameter-03.png" align="center">
            <br><br>
            
            <h4>Change default directory and query any file</h4>

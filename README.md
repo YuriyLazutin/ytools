@@ -16,7 +16,7 @@ ytools-query-directory-name - this is a simple program which allow you to use qu
 
 ytools-query-file-name - this is a simple program which allow you to use query dialog for select a file name.
 
-query-parameter - this tool allow you to request a different parameters in string format. It can be strings, numbers, dates in specified format.
+ytools-query-parameter - this tool allow you to request a different parameters in string format. It can be strings, numbers, dates in specified format.
 
 ytools-query-yesno - this is a simple program that allows you to ask a simple questions, the answer to which can be "yes" or "no".
 

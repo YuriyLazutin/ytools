@@ -30,6 +30,7 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent)
 
     // Add Line Edit
     leParamValue = new QLineEdit;
+    leParamValue->setObjectName(QString::fromUtf8("Line Edit"));
     leParamValue->setFocus();
     verticalLayout->addWidget(leParamValue);
     //leParamValue->setMinimumHeight(32);
@@ -97,44 +98,44 @@ void Dialog::SetDataMask(const char* dmask)
 
 void Dialog::SwitchOnValidator()
 {
-    QRegExpValidator val;
     QRegExp re;
 
     if (sDataType == "integer")
     {
-        if (!sDataMask.isEmpty())
+        if (sDataMask.isEmpty())
             re.setPattern("^[-+]?\\d{1,*}$");
         else
             re.setPattern(sDataMask);
     }
     else if (sDataType == "float")
-        if (!sDataMask.isEmpty())
+        if (sDataMask.isEmpty())
             re.setPattern("^([0-9]*|\\d*\\.\\d{1}?\\d*)$");
         else
             re.setPattern(sDataMask);
     else if (sDataType == "double")
     {
-        if (!sDataMask.isEmpty())
+        if (sDataMask.isEmpty())
             re.setPattern("^[+-]?([0-9]*\\.?[0-9]+|[0-9]+\\.?[0-9]*)([eE][+-]?[0-9]+)?$");
         else
             re.setPattern(sDataMask);
     }
     else if (sDataType == "date")
     {
-        if (!sDataMask.isEmpty())
+        if (sDataMask.isEmpty())
             re.setPattern("^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$");
         else
             re.setPattern(sDataMask);
     }
     else // sDataType == "string" and others
     {
-        if (!sDataMask.isEmpty())
+        if (sDataMask.isEmpty())
             re.setPattern("");
         else
             re.setPattern(sDataMask);
     }
-    val.setRegExp(re);
-    leParamValue->setValidator(&val);
+
+    QRegExpValidator *val= new QRegExpValidator(re, leParamValue);
+    leParamValue->setValidator(val);
 }
 
 void Dialog::SetSizeX(const int sx)

@@ -103,13 +103,13 @@ void Dialog::SwitchOnValidator()
     if (sDataType == "integer")
     {
         if (sDataMask.isEmpty())
-            re.setPattern("^[-+]?\\d{1,*}$");
+            re.setPattern("^[+-]?[0-9]*$");
         else
             re.setPattern(sDataMask);
     }
     else if (sDataType == "float")
         if (sDataMask.isEmpty())
-            re.setPattern("^([0-9]*|\\d*\\.\\d{1}?\\d*)$");
+            re.setPattern("^[+-]?([0-9]{0,9}|\\.[0-9]{0,9}|[0-9]{0,9}\\.[0-9]{0,9})$");
         else
             re.setPattern(sDataMask);
     else if (sDataType == "double")
@@ -129,7 +129,7 @@ void Dialog::SwitchOnValidator()
     else // sDataType == "string" and others
     {
         if (sDataMask.isEmpty())
-            re.setPattern("");
+            re.setPattern(".*");
         else
             re.setPattern(sDataMask);
     }

@@ -102,50 +102,62 @@
            <img src="query-parameter-03.png" align="center">
            <br><br>
            
-           <h4>Change default directory and query any file</h4>
-           In this example query file dialog will opened from /usr/share/src directory.<br><br>
+           <h4>Query a double numbers</h4>
+           You can enter a float numbers with double precision. Exponential form are supported.<br><br>
            <code>
              <font class="code_comment">#!/bin/bash<br>
              # some actions here<br></font>
-             file_name=$(ytools-query-file-name --message "Please select a source file name" --directory "/usr/share/src")<br>
-             echo "You selected the following file: " ${file_name}<br>
+             atom_mass=$(ytools-query-parameter -m "Please enter an atom mass" --data-type "double" )<br>
+             echo "You printed the following: " ${atom_mass}<br>
+             <font class="code_comment"># operations with atom_mass<br></font>
            </code>
            <br>As a result following window will appear:<br><br>
-           <img src="query-file-name-04.png" align="center">
+           <img src="query-parameter-04.png" align="center">
            <br><br>
            
            <h4>Advanced using</h4>
-           In this example we are using HTML markup language to improve out text request. Also we changing window size for better view and setting up default directory to "/usr/src"<br><br>
+           In this example we will create a step of simple quiz. We will ask the user a question, assuming that he must answer with a date. Also we are using HTML markup language to improve out text request. Also we changing window size, dialog title and "Accept" button text for better view.<br><br>
            <code>
              <font class="code_comment">#!/bin/bash<br>
              # some actions here<br></font>
-             file_name=$(ytools-query-file-name -x 700 -y 200 --message "&lt;h3&gt;Please select a source file name. We will use it for our processing.&lt;/h3&gt;&lt;br&gt;&lt;i&gt;You also can provide file name manually, just populate prompt string.&lt;/i&gt;" --directory "/usr/src")<br>
-             echo "You selected the following file: " ${file_name}<br>
-             <font class="code_comment"># Other actions with selected file<br></font>
+             answer=$(ytools-query-parameter -x 550 -y 230 --dtitle "Historical quiz" --message "&lt;h3&gt;Welcome to historical room&lt;/h3&gt;Let's check how well you know the history of the United States of America.&lt;br&gt;The first question will be as follows:&lt;br&gt;When was the United States Declaration of Independence ratified?&lt;br&gt;Your answer should be in following format YYYY/MM/DD" --data-type "date" --btntext "Answer!" )<br>
+             if [ "${answer}" == "1776/07/04" ]; then<br>
+             &nbsp;&nbsp; $(ytools-show-message --message "You are right!")<br>
+             else<br>
+             &nbsp;&nbsp; $(ytools-show-message --message "Sorry, but you are mistaken :(")<br>  
+             fi<br>
+             <font class="code_comment"># Next quiz step<br></font>
            </code>
-           <br>As a result following window will appear:<br><br>
-           <img src="query-file-name-05.png" align="center">
+           <br>As a result following windows will appear:<br><br>
+           <table style="width: 100%; border: none;"><tr>
+             <td style="width: 50%;"><img src="query-parameter-05.png" align="center"></td>
+             <td><img src="query-parameter-06.png" align="center"></td>
+           </tr></table>
            <br><br>
            
            <h4>Show help</h4>
            This command will show a help message.<br><br>
            <code>
              <br>
-             ytools-query-file-name --help<br>
+             ytools-query-parameter --help<br>
              <br>
            </code>
            <br>As a result following information will shown:<br><br>
 <pre style="font-family: Courier;">
-*** ytools-query-file-name - a simple program which allow you to use query dialog for select a file name. ***
+*** query-parameter - a simple program which allow you to request a different parameters in string format. ***
+Requested parameter can be string, number or date in specified format.
+You can specify a special mask to reject inconsistent data, and you can specify a data type.
+Also you can specify a message text to clarify you request for user.
+The inputed parameter will returned back to requesting program.
 
-Usage: ./ytools-query-file-name [options] 
+Usage: ./query-parameter [options] 
   -h, --help                         Display this help and exit.
-  -m, --message "Clarifying text"    Text string which will show in dialog (default "Please specify a file name"). Please use it for clarifying your request. You can use HTML markup language for better view.
-  -f, --file-mask "*.ext"            A filter mask witch will used during file selection. For example you can allow to select only *.dat files.
-  -d, --directory "/base/directory"  In this directory initially will open query file dialog.
-  -t, --dtitle "New dialog title"    This text will show in dialog header (default "Query file name").
+  -m, --message "Clarifying text"    Text string which will show in dialog (default "Please enter a parameter value"). Please use it for clarifying you request. You can use HTML markup language for better view.
+  -t, --dtitle "New dialog title"    This text will show in dialog header (default "Query parameter").
+  -c, --data-type "type"             A type of requesting data. It can be: "string", "integer", "float", "double" or "date" (default "string").
+  -d, --data-mask "Regular expression" A filter mask in regexp format which will used during data validation (default empty).
   -b, --btntext "New btn label"      Accept button will labeled with this text (default "Accept").
-  -x, --sizex window_width           This parameter allow you to customize window width (default 500 pixels, minimum 300).
+  -x, --sizex window_width           This parameter allow you to customize window width (default 300 pixels, minimum 300).
   -y, --sizey window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120).
 </pre>
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

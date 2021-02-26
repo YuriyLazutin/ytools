@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <meta http-equiv="content-type" content="text/html">
+    <meta name="author" content="Yuriy Lazutin" >
+    <meta name="description" content="ytools - documentation">
+    <meta name="keywords" content="Yuriy Lazutin, ytools, your tools, programming">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="Global">
+<!--
+    <meta name="robots" content="index,follow">
+-->
+    <title>ytools - this is your tools</title>
+    <link rel="stylesheet" type="text/css" href="../index.css">
+  </head>
+  
+  <body
+    bgproperties="fixed"
+    onload="window.defaultStatus='ytools - this is your tools'"
+    alink="#48298C"
+    link="#48298C"
+    vlink="#780078"
+    style="width: 100%;"
+  >
+
+    <header>
+      <table class="pghead">
+        <tr>
+          <td style="width: 5%;"></td>
+          <td style="width: 30%;"> <img src="ytools-header.png"></td>
+          <td style="width: 5%;"></td>
+          <td><H1>- this is your tools</H1></td>
+          <td style="width: 5%;"></td>
+        </tr>
+      </table>
+    </header>
+ 
+    <br>
+    
+    <!-- Central -->
+    <table class="tb">
+      <tr>
+        <td style="width: 10%;"></td>
+        <td valign="top" style="width: 68%; border-radius: 10px 10px; border: 1px solid black; padding: 20px;">
+          <h2>ytools-query-yesno</h2>
+          <article>
+            <p><span class="letter">T</span>his tool will show a dialog in which you can specify a simple question, assumes what the response will be "yes" or "no".
+              The answer will returned back to requesting program.
+              This tool provide you a different parameters to allow you to customize your request in wide manner.  
+              All parameters should be provided via command line.
+            <br><br>
+            <h3>Options:</h3>
+            <table class="topt">
+              <tr><th style="width: 10%;">Short</th><th style="width: 20%;">Long</th><th>Description</th></tr>
+              <tr><td align="center">-h</td><td>--help</td><td>Will show help and exit</td></tr>
+              <tr><td align="center">-q</td><td>--question "Your question"</td><td>A text message, it should clarify your request</td></tr>
+              <tr><td align="center">-t</td><td>--dtitle "New dialog title"</td><td>A text string which will show in dialog header</td></tr>
+              <tr><td align="center">-a</td><td>--yesbtn "New btn label"</td><td>This text will show on "Yes" button, i.e. you can rename this button</td></tr>
+              <tr><td align="center">-b</td><td>--nobtn "New btn label"</td><td>This text will show on "No" button, i.e. you can rename this button</td></tr>
+              <tr><td align="center">-m</td><td>--morpheus</td><td>If you specify this option a picture with Morpheus from Matrix will shown</td></tr>
+              <tr><td align="center">-x</td><td>--sizex window_width</td><td>This parameter allow you to customize window width (default 270 pixels, minimum 270)</td></tr>
+              <tr><td align="center">-y</td><td>--sizey window_height</td><td>This parameter allow you to customize window height (default 120 pixels, minimum 120)</td></tr>
+            </table>
+           <br>
+           <h3>Examples:</h3>
+           <h4>Ask a simple question</h4>
+           <code>
+             <font class="code_comment">#!/bin/bash<br>
+             # some actions here<br></font>
+             resp=$(ytools-query-yesno --question "Do you want to continue?")<br>
+             echo "User replied: " ${resp}<br>
+           </code>
+           <br>As a result following window will appear:<br><br>
+           <img src="query-yesno-01.png" align="center">
+           <br><br>
+           
+           <h4>Question with custom dialog</h4>
+           In this example we changing dialog size, we using HTML markups in question text, we changing dialog title, and we are renamed "Yes" and "No" buttons.<br><br>
+           <code>
+             <font class="code_comment">#!/bin/bash<br>
+             # some actions here<br></font>
+             resp=$(ytools-query-yesno -x 500 -y 100 -q "This file contains obsolete parameters. After processing,&lt;br&gt;they will be commented out. Do you agree to these changes?" --dtitle "Confirm your request" -a "Confirm" -b "Discard")<br>
+             if [ "${resp}" == "Yes" ]; then<br>
+             &nbsp;&nbsp; echo "User agree!"<br>
+             else<br>
+             &nbsp;&nbsp; echo "User was declined the offer and we must choose a different way"<br>  
+             fi<br>
+           </code>
+           <br>As a result following window will appear:<br><br>
+           <img src="query-yesno-02.png" align="center">
+           <br><br>
+           
+           <h4>Advanced using</h4>
+           In this example we changing dialog size, we using HTML markups in question text, we changing dialog title, we are renamed "Yes" and "No" buttons. Also we will show a Morpheus.<br><br>
+           <code>
+             <font class="code_comment">#!/bin/bash<br>
+             # some actions here<br></font>
+             resp=$(ytools-query-yesno -x 800 -y 400 -t "Make your choise" -q "&lt;h3&gt;What do you choose, Neo? &lt;/h3&gt;&lt;br&gt;This is your last chance. After this, there is no turning back.&lt;br&gt;You take the blue pill — the story ends, you wake up in your bed&lt;br&gt; and believe whatever you want to believe.&lt;br&gt;You take the red pill — you stay in Wonderland,&lt;br&gt;and I show you how deep the rabbit hole goes.&lt;br&gt;Remember: all I'm offering is the truth. Nothing more." --yesbtn "Red pill" --nobtn "Blue pill" --morpheus)<br>
+             if [ "${resp}" == "Yes" ]; then<br>
+             &nbsp;&nbsp; echo "Go out from matrix"<br>
+             else<br>
+             &nbsp;&nbsp; echo "Wake up in your bed"<br>  
+             fi<br>
+           </code>
+           <br>As a result following window will appear:<br><br>
+           <img src="query-yesno-03.png" align="center">
+           <br><br>
+           
+           <h4>Show help</h4>
+           This command will show a help message.<br><br>
+           <code>
+             <br>
+             query-yesno --help<br>
+             <br>
+           </code>
+           <br>As a result following information will shown:<br><br>
+<pre style="font-family: Courier;">
+query-yesno - this tool will show a dialog in which you can specify a simple question, assumes what the response will be "yes" or "no".
+              The answer will returned back to requesting program. All parameters should be provided via command line.
+
+Options:
+    -q  --question      "Your question"        A text message, it should clarify you request
+    -t  --dtitle        "New dialog title"     A text string which will show in dialog header
+    -a  --yesbtn        "New btn label"        This text will show on "Yes" button, i.e. you can rename this button
+    -b  --nobtn         "New btn label"        This text will show on "No" button, i.e. you can rename this button
+    -m  --morpheus                             If you specify this option a picture with Morpheus from Matrix will shown
+    -x  --sizex         window_width           This parameter allow you to customize window width (default 270 pixels, minimum 270)
+    -y  --sizey         window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120)
+    -h  --help          Will show help and exit
+</pre>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          </article>    
+        </td>
+        <td style="width: 10%;"></td>
+      </tr>
+    </table>
+
+  </body>
+</html>

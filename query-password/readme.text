@@ -1,0 +1,20 @@
+query-password - this tool allow you to request a passwords.
+                  You can specify a message text to clarify you request for user.
+                  The inputed value will returned back to requesting program.
+                  All parameters should be provided via command line.
+
+Options:
+    -m	--message	"Clarifying text"      A text message, it should clarify you request. You can use HTML markups for better view
+    -t  --dtitle        "New dialog title"     A text string which will show in dialog header
+    -b  --btntext       "New btn label"        This text will show onto "Accept" button, i.e. you can rename this button
+    -x  --sizex         window_width           This parameter allow you to customize window width (default 300 pixels, minimum 300)
+    -y  --sizey         window_height          This parameter allow you to customize window height (default 120 pixels, minimum 120)
+    -h	--help		                       Will show help and exit
+
+Examples:
+
+./query-password
+./query-password --message "Enter a password from Oracle user" --btntext "Connect"
+./query-password -x 350 -y 250 -t "Please provide authentication information" -m "<h3>Authentication required</h3><i>This server required authentication</i><br>Host: superserver.domain.com<br>Service: cargo<br>Account: SYSTEM<br><br>Please provide a password..." --btntext "Log in"
+./query-password --help
+

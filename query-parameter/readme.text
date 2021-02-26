@@ -19,8 +19,7 @@ Examples:
 ./query-parameter --message "Please enter a new file name" --data-type "string" --btntext "Save It!"
 ./query-parameter -m "What year were are you born?" --data-type "integer" --data-mask "^[1,2]{1}[0-9]{3}$"
 ./query-parameter -m "Please enter a price" --data-type "float"
-./query-parameter --message "" --data-type "double"
-./query-parameter --message "Please enter a day of your birth in format (YYYY\MM\DD)" --data-type "date" --data-mask "YYYY\MM\DD"
-./query-parameter -x 700 -y 200 -t "New dialog title" --message "<h3>A long long header</h3><br>This is long long reasoning abount your request.<br><i>P.s. Bla-bla-bla</i>" --btntext "Remake"
+./query-parameter -m "Please enter an atom mass" --data-type "double"
+./query-parameter -x 550 -y 230 --dtitle "Historical quiz" --message "<h3>Welcome to historical room</h3>Let's check how well you know the history of the United States of America.<br>The first question will be as follows:<br>When was the United States Declaration of Independence ratified?<br>Your answer should be in following format YYYY/MM/DD" --data-type "date" --btntext "Answer!"
 ./query-parameter --help
 

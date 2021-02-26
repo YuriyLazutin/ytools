@@ -49,3 +49,13 @@ for file_name in $(find "./doc" -type f -name "*${SOURCE_TOOL_NAME}*" -print); d
   fi
 
 done
+
+# Fixing index.html
+echo -n "Add link into index.html: "
+sed -i "/<!-- Generator ID=HAQTer5632hg3 -->/i\              <li><a href=\"doc/${TARGET_TOOL_NAME}.html\">ytools-${TARGET_TOOL_NAME}</a> - this tool allow you to ...</li>" index.html
+echo -e "\033[1;32mDone\033[0m"
+
+# Fixing ytools.pro
+echo -n "Add new project into ytools.pro: "
+sed -i "/# Generator ID=Tnwbncdgye42376/a\    ${TARGET_TOOL_NAME} \x5C" ytools.pro
+echo -e "\033[1;32mDone\033[0m"

@@ -63,3 +63,9 @@ echo -e "\033[1;32mDone\033[0m"
 echo -n "Add new tool into install script: "
 sed -i "/# Generator ID=H7JndWqM8dghfgy/i\InstallTool \"${TARGET_TOOL_NAME}\"" install
 echo -e "\033[1;32mDone\033[0m"
+
+# Fixing README.md
+echo -n "Add description into README.md: "
+echo "
+ytools-${TARGET_TOOL_NAME} - this tool allow you to..." >> README.md
+echo -e "\033[1;32mDone\033[0m"

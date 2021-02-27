@@ -1,9 +1,8 @@
 #!/bin/bash
 
-YTOOLS_BUILDS="./Release"
-SOURCE_TOOL=$( ${YTOOLS_BUILDS}/query-directory-name/query-directory-name --message "Please select an existing tool directory")
+SOURCE_TOOL=$( ytools-query-directory-name --message "Please select an existing tool directory")
 SOURCE_TOOL_NAME=$( basename "${SOURCE_TOOL}")
-TARGET_TOOL_NAME=$( ${YTOOLS_BUILDS}/query-parameter/query-parameter --message "Please enter a new tool name" )
+TARGET_TOOL_NAME=$( ytools-query-parameter --message "Please enter a new tool name" )
 
 # Creating directories
 for dir_name in $(find "${SOURCE_TOOL}" -type d -print); do
@@ -58,4 +57,9 @@ echo -e "\033[1;32mDone\033[0m"
 # Fixing ytools.pro
 echo -n "Add new project into ytools.pro: "
 sed -i "/# Generator ID=Tnwbncdgye42376/a\    ${TARGET_TOOL_NAME} \x5C" ytools.pro
+echo -e "\033[1;32mDone\033[0m"
+
+# Fixing install script
+echo -n "Add new tool into install script: "
+sed -i "/# Generator ID=H7JndWqM8dghfgy/i\InstallTool \"${TARGET_TOOL_NAME}\"" install
 echo -e "\033[1;32mDone\033[0m"

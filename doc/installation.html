@@ -45,16 +45,89 @@
         <td valign="top" style="width: 68%; border-radius: 10px 10px; border: 1px solid black; padding: 20px;">
           <h2>Installation steps</h2>
           <article>
-            <p><span class="letter">Y</span>ou should to do following steps 
-            <br><br>
-            <h3>Download YTOOLS:</h3>
+            <p><span class="letter">I</span>nstalling a set of utilities "YTools" is a fairly simple process and does not require any special skills. You should to do following steps:
+            <ul style="padding-left: 50px; line-height: 2em;">
+              <li style="list-style-type: disc;">Download YTools</li>
+              <li style="list-style-type: disc;">Set up an installation parameters (optional)</li>
+              <li style="list-style-type: disc;">Run installation</li>
+            </ul>            
+            Below described this steps.</p>
             <br>
+            <h3>Download YTools:</h3>
+            <p><span class="letter">I</span>nitially you should download YTools sources. You can download the zip archive directly from github or you can use terminal and command line to clone unpacked sources.</p><br>
+            <h4>Download the zip archive directly from github</h4>
+            <ul style="padding-left: 50px; line-height: 2em;">
+              <li style="list-style-type: disc;">Open your web browser and go to <a href="https://github.com/YuriyLazutin/ytools">https://github.com/YuriyLazutin/ytools</a>.</li>
+              <li style="list-style-type: disc;">Click on "Code" button, and then on "Download ZIP".</li>
+              <li style="list-style-type: disc;">Store the archive on your HOME/Downloads directory.<br><br><img src="installation-01.gif" align="center"><br></li>
+              <li style="list-style-type: disc;">After downloads has completed you should unpack ytools-main.zip archive. To do this, please use your favorite archive tool, or use following command:
+              <br><code>&nbsp;&nbsp; unzip ytools-main.zip<br></code>
+              </li>
+              <li style="list-style-type: disc;">As a result "ytools-main" directory with YTools sources will created.</li>
+            </ul>    
+            
+            <br>
+            <h4>Download using terminal and command line</h4>
+            <ul style="padding-left: 50px; line-height: 2em;">
+              <li style="list-style-type: disc;">Run your favorite terminal.</li>
+              <li style="list-style-type: disc;">Input the following command:
+              <br><code>&nbsp;&nbsp; git clone "https://github.com/YuriyLazutin/ytools.git"<br></code>
+              </li>
+              <li style="list-style-type: disc;">As a result "ytools" directory with YTools sources will created.</li>
+            </ul>    
+            
+            <br>
+
             <h3>Precompile customization:</h3>
+            <p><span class="letter">T</span>his step is optional, however you may want to change some of the installation settings of YTools. You can changing:
+            <ul style="padding-left: 50px; line-height: 2em;">
+              <li style="list-style-type: disc;">the target directory for installing the utilities</li>
+              <li style="list-style-type: disc;">the directory with shortcuts</li>
+              <li style="list-style-type: disc;">the prefix of the utilities</li>
+            </ul>
+            </p>
+
+            <h4>Target directory</h4>
+            YTools utilities will copied into this directory. By default target directory (or YTOOLS_HOME) is "/opt/ytools". If you want you can change this target. To do this follow the steps:
+            <ul style="padding-left: 50px; line-height: 2em;">
+              <li style="list-style-type: disc;">Change the current directory to YTools sources location (${HOME}/Downloads/ytools-main or ${HOME}/Downloads/ytools)</li>
+              <li style="list-style-type: disc;">Open the install script in your favorite text editor</li>
+              <li style="list-style-type: disc;">Change the value of YTOOLS_HOME environment variable</li>
+              <li style="list-style-type: disc;">Save the install script</li>
+            </ul>
+            
+            <h4>Shortcuts directory</h4>
+            Usually programs from /opt directory is not included into users $PATH environment variable, so you cannot use it just printed his names.
+            YTools programs is not included into $PATH, but during installation we will create a symbolic links in directory which included into users $PATH.
+            By default this directory is "/usr/local/bin". If you want you can change this location. Just do following steps:
+            <ul style="padding-left: 50px; line-height: 2em;">
+              <li style="list-style-type: disc;">Change the current directory to YTools sources location (${HOME}/Downloads/ytools-main or ${HOME}/Downloads/ytools)</li>
+              <li style="list-style-type: disc;">Open the install script in your favorite text editor</li>
+              <li style="list-style-type: disc;">Change the value of LBIN environment variable</li>
+              <li style="list-style-type: disc;">Save the install script</li>
+            </ul>
+
+            <h4>YTools prefix</h4>
+            Initially YTools utilities uses a short names of each utility.
+            To avoid conflicts with other programs, a prefix is added to the name of each utility.
+            For example, the utility is initially named "show-message", but after installation it will be named "${PREFIX}show-message".
+            By default prefix is "ytools-", i.e. "show-message" tool will finally called "ytools-show-message".
+            If you are not afraid of conflict situations, you can remove the prefix or change it to one of you like.  
+            To do this follow the steps:
+            <ul style="padding-left: 50px; line-height: 2em;">
+              <li style="list-style-type: disc;">Change the current directory to YTools sources location (${HOME}/Downloads/ytools-main or ${HOME}/Downloads/ytools)</li>
+              <li style="list-style-type: disc;">Open the install script in your favorite text editor</li>
+              <li style="list-style-type: disc;">Change the value of YTOOLS_PREFIX environment variable (set up YTOOLS_PREFIX="" if you want to remove it)</li>
+              <li style="list-style-type: disc;">Save the install script</li>
+            </ul>
+            
             <br>
-            <h3>Compile and install:</h3>
-            <br>
-            <h3>Test it!:</h3>
-            <br>
+            <h3>Compiling and installation:</h3>
+            <p><span class="letter">A</span>ll required modifications already done. Just change the current directory to YTools sources location (${HOME}/Downloads/ytools-main or ${HOME}/Downloads/ytools) and execute install script.<br>
+            <code><br>&nbsp;&nbsp; ./install<br><br></code>
+            <br>Enjoy!
+            </p>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
           </article>    
         </td>
         <td style="width: 10%;"></td>

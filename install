@@ -56,3 +56,5 @@ InstallTool "query-password"
 InstallTool "query-yesno"
 InstallTool "show-message"
 # Generator ID=H7JndWqM8dghfgy
+
+ytools-show-message --message "YTools was installed successfully."

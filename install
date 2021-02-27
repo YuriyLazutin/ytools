@@ -9,8 +9,28 @@
 #          https://www.paypal.com/paypalme/yuriylazutin
 #          https://www.patreon.com/yuriylazutin
 
-export YTOOLS_HOME="/opt/ytools"
-export LBIN="/usr/local/bin"
+YTOOLS_PREFIX="ytools-"
+YTOOLS_HOME="/opt/ytools"
+LBIN="/usr/local/bin"
+
+function InstallTool {
+  echo -n "Installing \"${1}\" into \"${YTOOLS_HOME}/${1}\": "
+  sudo cp "${1}/${1}" "${YTOOLS_HOME}/${1}"
+  if [ $? -eq 0 ]; then
+    echo -e "\033[1;32mDone\033[0m"
+  else
+    echo -e "\033[1;31mFailed\033[0m"
+  fi
+
+  echo -n "Creating shortcut \"${LBIN}/${YTOOLS_PREFIX}${1}\": "
+  sudo ln -s "${YTOOLS_HOME}/${1}" "${LBIN}/${YTOOLS_PREFIX}${1}"
+  if [ $? -eq 0 ]; then
+    echo -e "\033[1;32mDone\033[0m"
+  else
+    echo -e "\033[1;31mFailed\033[0m"
+  fi
+}
+
 
 # Create
 #	.qmake.stash
@@ -18,31 +38,20 @@ export LBIN="/usr/local/bin"
 qmake ytools.pro -spec linux-g++
 
 # Create
-#	show-message/Makefile
+#	{tool-name}/Makefile
 make -f Makefile qmake_all
 
-# Create
-#	show-message/dialog.o
-#	show-message/main.o
-#	show-message/moc_dialog.cpp
-#	show-message/moc_dialog.o
-#	show-message/moc_predefs.h
-#	show-message/show-message
-#	query-file-name/dialog.o
-#	query-file-name/main.o
-#	query-file-name/moc_dialog.cpp
-#	query-file-name/moc_dialog.o
-#	query-file-name/moc_predefs.h
-#	query-file-name/query-file-name
+# Create moc files, compile to *.o and assemble to executables.
+#	{tool-name}/*.o
+#	{tool-name}/moc_*
+#	{tool-name}/{tool-name}
 make -j8
 
+# Installation on host
 sudo mkdir -p "${YTOOLS_HOME}"
-sudo cp "query-directory-name/query-directory-name" "${YTOOLS_HOME}/query-directory-name"
-sudo ln -s "${YTOOLS_HOME}/query-directory-name" "${LBIN}/ytools-query-directory-name"
-sudo cp "query-file-name/query-file-name" "${YTOOLS_HOME}/query-file-name"
-sudo ln -s "${YTOOLS_HOME}/query-file-name" "${LBIN}/ytools-query-file-name"
-sudo cp "query-yesno/query-yesno" "${YTOOLS_HOME}/query-yesno"
-sudo ln -s "${YTOOLS_HOME}/query-yesno" "${LBIN}/ytools-query-yesno"
-sudo cp "show-message/show-message" "${YTOOLS_HOME}/show-message"
-sudo ln -s "${YTOOLS_HOME}/show-message" "${LBIN}/ytools-show-message"
-
+InstallTool "query-directory-name"
+InstallTool "query-file-name"
+InstallTool "query-parameter"
+InstallTool "query-password"
+InstallTool "query-yesno"
+InstallTool "show-message"
